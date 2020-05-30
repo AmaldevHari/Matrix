@@ -1,2 +1,2 @@
 # Matrix
-Matrix Class with matrix operations
+Matrix Class with matrix operations.
