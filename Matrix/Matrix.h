@@ -25,17 +25,10 @@ public:
 		Matrix::col = col;
 		Matrix::mat= a;
 
-	/*	for( int i=0 ; i< row*col ;i ++){
-
-						Matrix::mat[i]= a[i];
-
-
-					}
-*/
 
 	};
 	Matrix	multiply(Matrix b){
-		int col= this->col;
+
 		float* mat;
 		int matrix1_row= this->row;
 		int matrix2_col = b.col;
