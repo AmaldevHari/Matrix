@@ -18,8 +18,7 @@ int main(void){
 	float* mat1 =&ary2[0];
 	Matrix m(mat, row, col);
 	Matrix m2(mat1,3,3);
-	Matrix z = m.multiply(m2);
-
+	Matrix z =m*m2;
 	for(int i =0; i<9;i++){
 		char e ='\n';
 		char append=' ';

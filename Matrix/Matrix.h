@@ -52,7 +52,10 @@ public:
 		return result;
 
 		};
+	Matrix operator*( Matrix& b) {
+		return this->multiply(b);
 
+	};
 
 };
 
