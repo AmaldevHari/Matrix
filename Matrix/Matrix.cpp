@@ -11,18 +11,24 @@
 int main(void){
 
 
-	int row=2;int col=2;
-	float ary[]={2.0,0.0,0.0,1.0};
+	int row=3;int col=3;
+	float ary[]={2,2,2,2,2,2,2,2,2,2};
 	float* mat = &ary[0];
-	float ary2[] ={1,0};
+	float ary2[] ={1,1,1,1,1,1,1,1,1};
 	float* mat1 =&ary2[0];
 	Matrix m(mat, row, col);
-	cout<<m.mat[0]<<" "<<m.mat[1]<<"\n";
-	Matrix m2(mat1,2,1);
+	Matrix m2(mat1,3,3);
 	Matrix z = m.multiply(m2);
-	cout<< z.mat[0] <<" " <<z.mat[1]<<"\n";
-	cout<<*mat<<","<<*(mat +1)<<","<<*(mat+2)<<","<<*(mat+3)<<"\n";
 
+	for(int i =0; i<9;i++){
+		char e ='\n';
+		char append=' ';
+		if((i+1)%3 ==0){
+			append=e;
+		}
+	cout<<*(z.mat+ i)<<append;
+	append=' ';
+	}
 
 	return 0;
 }
