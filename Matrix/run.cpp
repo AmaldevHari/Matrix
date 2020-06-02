@@ -58,16 +58,28 @@ row1=5;col1=5;
 
 	cout<<m.determinant()<<"\n";
 
+
 	auto end = std::chrono::system_clock::now();
 
 	std::chrono::duration<double> elapsed_seconds = end-start;
     std::time_t end_time = std::chrono::system_clock::to_time_t(end);
 
 	std::cout << "finished computation at " << std::ctime(&end_time)
-	              << "elapsed time: " << elapsed_seconds.count() << "s\n";
+	              << "elapsed time: " << elapsed_seconds.count() << "\n";
 
-	m.transpose().print_matrix();
+
+	//m.cofactor().print_matrix();
+	cout<<"inverse of this matrix is:"<<"\n";
+	/*float det = m.determinant();
+	float input =1.0/det;
+	Matrix n;n=(m.cofactor()).transpose();
+	n.scalar_multiply(input);
+	n.print_matrix();
+
+	Matrix x = m*n;
+	x.print_matrix();*/
+	m.inverse().print_matrix();
 	cout<<"\n";
-	m.cofactor().print_matrix();
+	(m* m.inverse()).print_matrix();
 	return 0;
 }

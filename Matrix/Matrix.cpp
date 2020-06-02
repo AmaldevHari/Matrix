@@ -53,8 +53,12 @@ Matrix	Matrix::multiply(Matrix b){
 
 				}
 
+				if(entry > 1.0e-3){
 				mat[current_result_index]= entry;
-
+				}
+				else{
+					mat[current_result_index]= 0;
+				}
 				current_result_index ++;
 			}
 		}
@@ -210,6 +214,30 @@ int ary_index=0;
 
 }
 Matrix cofactor(ary,row,col);
-return cofactor;};
+return cofactor.transpose();
+};
 
 
+void Matrix::scalar_multiply(float a){
+
+	int row=this->row;
+	int col=this->col;
+
+	for( int i=0 ;i< row ;i++){
+		for(int j=0; j<col ;j++){
+			this->mat[i][j]= a* this->mat[i][j];
+		}
+
+	}
+};
+
+Matrix::Matrix(){};
+
+Matrix Matrix::inverse(){
+		float det = this->determinant();
+		float input =1.0/det;
+		Matrix x=this->cofactor();
+		x= x.transpose();
+		x.scalar_multiply(input);
+		return x;
+};

@@ -25,7 +25,7 @@ public:
 	float** mat;
 
 	Matrix(float* , int ,int );
-
+	Matrix();
 	Matrix	multiply(Matrix);
 
 	Matrix operator*( Matrix );
@@ -39,5 +39,9 @@ public:
 	Matrix transpose();
 
 	Matrix cofactor();
+
+	void scalar_multiply(float);
+
+	Matrix inverse();
 };
 #endif /* MATRIX_H_ */
