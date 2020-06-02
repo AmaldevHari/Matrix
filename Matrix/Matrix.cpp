@@ -161,7 +161,7 @@ float Matrix::determinant(){
 
 	float result=0;
 
-	if( row ==2 && col ==2){
+	if( row ==2){
 		return this->mat[0][0] *this->mat[1][1] -this->mat[0][1]*this->mat[1][0];
 	}
 
@@ -238,7 +238,7 @@ Matrix Matrix::adjoint(){
 	float* ary =new float[this->col*this->row];
 	int ary_index=0;
 
-	if(col ==2 && row ==2){
+	if(col ==2){
 
 		ary[0] =this->mat[1][1];
 		ary[1] = -1*this->mat[0][1] ;
@@ -301,6 +301,10 @@ Matrix::Matrix(){};
  ***************************************************************************************************************************/
 Matrix Matrix::inverse(){
 
+	if(this->col != this->row){
+		cout<<"error: only square matrices can have inverse"<<"\n";
+		return Matrix();
+	}
 	float det = this->determinant();
 	float input =1.0/det;
 

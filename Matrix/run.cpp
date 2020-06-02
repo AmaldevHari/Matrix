@@ -13,13 +13,13 @@
 int main(void){
 
 
-	float array1[9]= {1,1,3,1,1,7,9,4,8};
+	float array1[12]= {1,1,3,1,1,7,1,5,6,3,2,8};
 
 
 	int row1,col1;
 
 
-	row1=3;col1=3;
+	row1=3;col1=4;
 
 
 	Matrix m(&array1[0], row1, col1);
