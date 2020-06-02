@@ -8,12 +8,10 @@
 
 
 #include "Matrix.h"
-#include <chrono>
-#include <ctime>
 
 
 int main(void){
-	using namespace std::chrono;
+
 
 	float array1[49]= {1,2,3,3,5,6,7,3,2,1,3,5,6,7,6,7,3,3,5,6,7,1,1,1,1,5,6,7,5,5,5,5,5,6,7,6,6,6,6,6,6,7,7,7,7,7,7,7,7};
 	float array2;
