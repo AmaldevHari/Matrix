@@ -12,11 +12,11 @@
 int main(void){
 
 
-	float* array1;
-	float* array2;
+	float array1[9]= {1,2,3,3,2,1,6,7,3};
+	float array2;
 
 	int row1,col1,row2,col2;
-
+/*
 	cout<<"Enter number of rows for left hand matrix:";
 	cin>>row1;
 	cout<<"\n";
@@ -42,15 +42,16 @@ int main(void){
 	cout<<"Enter the elements of the right hand matrix row by row with each element followed by Enter key:";
 		for(int i =0 ;i <num_elements2 ;i++){
 			cin>>array2[i];
-		}
+		}*/
+
+row1=3;row2=2;col1=3;col2=2;
 
 
+	Matrix m(&array1[0], row1, col1);
+	//Matrix m2(array2,row2,col2);
+//	Matrix z =m*m2;
+	//z.print_matrix();
 
-	Matrix m(array1, row1, col1);
-	Matrix m2(array2,row2,col2);
-	Matrix z =m*m2;
-	z.print_matrix();
-
-
+	cout<<m.determinant();
 	return 0;
 }

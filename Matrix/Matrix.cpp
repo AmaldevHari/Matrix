@@ -115,5 +115,46 @@ int Matrix::print_matrix(){
 			return 0;
 	};
 
+float Matrix::determinant(){
+	float result=0;
+
+	if( this->row ==2 && this->col ==2){
+		return this->mat[0][0] *this->mat[1][1] -this->mat[0][1]*this->mat[1][0];
+	}
+	else{
+
+
+		int col=this->col;
+		int row=this->row;
+
+		for(int i=0; i< col ;i++){
+
+			float* arr = new float[(row-1)*(col-1)];
+			int array_index=0;
+
+			for(int j=0;j< row ;j++){
+				for(int k=0; k<col; k++){
+
+					if (!(k==i || j==0)){
+						arr[array_index]= this->mat[j][k];
+						array_index++;
+					}
+				}
+			}
+			Matrix m(arr, row-1,col-1);
+			if((i+1)%2 ==0){
+				result+= -1*this->mat[0][i]*m.determinant();
+			}
+			else{
+				result+= this->mat[0][i]*m.determinant();
+			}
+
+		}
+
+	}
+	return result;
+
+};
+
 
 

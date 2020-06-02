@@ -31,6 +31,6 @@ public:
 	float** make_2d(float* , int ,int);
 
 	int print_matrix();
-
+	float determinant();
 };
 #endif /* MATRIX_H_ */
