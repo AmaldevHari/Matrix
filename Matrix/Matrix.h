@@ -95,7 +95,7 @@ public:
 
 		for ( int i =0 ;i < rows ; i++ ){
 
-			float row_elements[cols];
+			float* row_elements= (float*) malloc(sizeof(float)*cols);
 
 			for( int j =0 ; j< cols ;j++){
 
