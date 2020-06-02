@@ -292,3 +292,8 @@ bool Matrix::equal(Matrix b){
 	return result;
 
 };
+
+Matrix Matrix::cofactor(){
+	return this->adjoint().transpose();
+
+};

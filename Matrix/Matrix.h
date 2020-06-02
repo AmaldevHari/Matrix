@@ -43,6 +43,8 @@ public:
 
 	Matrix inverse();
 
+	Matrix cofactor();
+
 	bool equal(Matrix );
 };
 #endif /* MATRIX_H_ */
