@@ -3,6 +3,9 @@
  *
  *  Created on: May 30, 2020
  *      Author: amaldev
+ * Description: A high level description of the ALgorithms I used can be found in the algorithm.txt file included in the
+ * 				project.
+ *
  */
 
 #include "Matrix.h"
@@ -79,18 +82,25 @@ Matrix	Matrix::multiply(Matrix b){
 	return result;
 
 };
+
+/***************************************************************************************************************************
+ * Overloaded * operator for multiplication of two matrices
+ ***************************************************************************************************************************/
 Matrix Matrix::operator*( Matrix b) {
 
 	return this->multiply(b);
 
 };
 
+/***************************************************************************************************************************
+ * This function is called inside the constructor to change the 1D input to 2D matrix. 2D matrix structure is necessary
+ * for implementation of other matrix operations.
+ ***************************************************************************************************************************/
 float** Matrix::make_2d(float* mat, int rows, int cols){
 
 
 
 	float** temp_mat = new float*[rows];
-
 	int current_index=0;
 
 	for ( int i =0 ;i < rows ; i++ ){
@@ -100,7 +110,6 @@ float** Matrix::make_2d(float* mat, int rows, int cols){
 		for( int j =0 ; j< cols ;j++){
 
 			row_elements[j]= mat[current_index];
-
 			current_index++;
 		}
 		temp_mat[i]= row_elements;
@@ -109,7 +118,9 @@ float** Matrix::make_2d(float* mat, int rows, int cols){
 	return temp_mat;
 };
 
-
+/***************************************************************************************************************************
+ * Prints out the matrix in standard matrix form into stdout. The columns and rows are interpreted from the object members.
+ ***************************************************************************************************************************/
 int Matrix::print_matrix(){
 
 	string append = " ";
@@ -133,7 +144,11 @@ int Matrix::print_matrix(){
 };
 
 
-
+/***************************************************************************************************************************
+ *finds the determinant of the matrix this function is called with. First s=checks if the matrix is square or not.
+ *In the former case this function is recursively called with a base case for 2 x 2 matrix. The method used is
+ *is cofactor expansion along the first row.
+ ***************************************************************************************************************************/
 float Matrix::determinant(){
 
 	int col=this->col;
@@ -169,10 +184,10 @@ float Matrix::determinant(){
 			}
 		}
 		Matrix m(arr, row-1,col-1);
+
 		if((i+1)%2 ==0){
 			result+= -1*this->mat[0][i]*m.determinant();
-		}
-		else{
+		}else{
 			result+= this->mat[0][i]*m.determinant();
 		}
 
@@ -183,7 +198,9 @@ float Matrix::determinant(){
 
 };
 
-
+/***************************************************************************************************************************
+ * Transposes the matrix this function is called. Rows are switched to columns and vice versa
+ ***************************************************************************************************************************/
 Matrix Matrix::transpose(){
 
 	float* ary= new float[this->row *this->col];
@@ -204,7 +221,10 @@ Matrix Matrix::transpose(){
 	return m;
 };
 
-
+/***************************************************************************************************************************
+ * adjoint is the transpose of a cofactor matrix. Cofactor matrix is the matrix that is replaced with the determinant of
+ * the (n-1) x(n-1) matrix formed by eliminating the row and column of an element, at the place of that element.
+ ***************************************************************************************************************************/
 Matrix Matrix::adjoint(){
 
 	int col=this->col;
@@ -216,8 +236,6 @@ Matrix Matrix::adjoint(){
 	}
 
 	float* ary =new float[this->col*this->row];
-
-
 	int ary_index=0;
 
 	if(col ==2 && row ==2){
@@ -232,6 +250,7 @@ Matrix Matrix::adjoint(){
 
 	for(int i=0; i< col ;i++){
 		for(int h=0 ;h <row ;h++){
+
 			float* arr = new float[(row-1)*(col-1)];
 			int array_index=0;
 
@@ -251,10 +270,13 @@ Matrix Matrix::adjoint(){
 		}
 
 	}
+
 	Matrix cofac(ary,row,col);
 	return cofac;
 };
-
+/***************************************************************************************************************************
+ * multiplies each element of the matrix this function is called with the input parameter a.
+ ***************************************************************************************************************************/
 
 void Matrix::scalar_multiply(float a){
 
@@ -268,9 +290,15 @@ void Matrix::scalar_multiply(float a){
 
 	}
 };
-
+/***************************************************************************************************************************
+ * non initiliazing constructor for returning void matrices on error.
+ ***************************************************************************************************************************/
 Matrix::Matrix(){};
 
+/***************************************************************************************************************************
+ * returns an inverse matrix. This algorithm uses the adjoint() function followed by determinant(). The inverse of a matrix A
+ * is defined as 1/det(A) x adj(A)
+ ***************************************************************************************************************************/
 Matrix Matrix::inverse(){
 
 	float det = this->determinant();
@@ -282,6 +310,11 @@ Matrix Matrix::inverse(){
 	return x;
 };
 
+/***************************************************************************************************************************
+ * checks if two matrices are equal. first checks if the dimensions are equal. If yes then each entry is checked row by row
+ * in a linear manner until one of them is not equal or the checking completes. In the case of completion true vale is
+ * returned by default
+ ***************************************************************************************************************************/
 bool Matrix::equal(Matrix b){
 
 	if(this->row != b.row || this->col != b.col){
@@ -299,7 +332,9 @@ bool Matrix::equal(Matrix b){
 	return result;
 
 };
-
+/***************************************************************************************************************************
+ * cofactor function that transposes the adjoint of a matrix.
+ ***************************************************************************************************************************/
 Matrix Matrix::cofactor(){
 	return this->adjoint().transpose();
 
