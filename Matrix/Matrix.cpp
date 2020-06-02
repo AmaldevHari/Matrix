@@ -22,7 +22,10 @@
 
 Matrix	Matrix::multiply(Matrix b){
 
-
+	if(b.row != this->col){
+		cout<<"error: matrix dimensions are not compatible for multiplication"<<"\n";
+		return Matrix();
+	}
 
 
 
@@ -101,10 +104,13 @@ Matrix	Matrix::multiply(Matrix b){
 
 
 int Matrix::print_matrix(){
+
 		string append = " ";
 		string e ="\n";
+
 		int col=this->col;
 		int row=this->row;
+
 			for(int i =0; i<row;i++){
 				for( int j=0; j<col ;j++){
 
@@ -184,13 +190,23 @@ return m;
 };
 
 
-Matrix Matrix::cofactor(){
+Matrix Matrix::adjoint(){
 
 float* ary =new float[this->col*this->row];
 
 int col=this->col;
 int row=this->row;
 int ary_index=0;
+
+if(col ==2 && row ==2){
+
+	ary[0] =this->mat[1][1];
+	ary[1] = -1*this->mat[0][1] ;
+	ary[2]=  -1*this->mat[1][0];
+	ary[3] =this->mat[0][0];
+
+	 return Matrix(ary,row,col);
+}
 
 		for(int i=0; i< col ;i++){
 			for(int h=0 ;h <row ;h++){
@@ -214,7 +230,7 @@ int ary_index=0;
 
 }
 Matrix cofactor(ary,row,col);
-return cofactor.transpose();
+return cofactor;
 };
 
 
@@ -236,8 +252,7 @@ Matrix::Matrix(){};
 Matrix Matrix::inverse(){
 		float det = this->determinant();
 		float input =1.0/det;
-		Matrix x=this->cofactor();
-		x= x.transpose();
+		Matrix x=this->adjoint();
 		x.scalar_multiply(input);
 		return x;
 };

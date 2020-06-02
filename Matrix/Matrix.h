@@ -24,6 +24,7 @@ public:
 
 	Matrix(float* , int ,int );
 	Matrix();
+
 	Matrix	multiply(Matrix);
 
 	Matrix operator*( Matrix );
@@ -36,7 +37,7 @@ public:
 
 	Matrix transpose();
 
-	Matrix cofactor();
+	Matrix adjoint();
 
 	void scalar_multiply(float);
 
