@@ -8,11 +8,14 @@
 
 
 #include "Matrix.h"
+#include <chrono>
+#include <ctime>
+
 
 int main(void){
+	using namespace std::chrono;
 
-
-	float array1[9]= {1,2,3,3,2,1,6,7,3};
+	float array1[49]= {1,2,3,3,5,6,7,3,2,1,3,5,6,7,6,7,3,3,5,6,7,1,1,1,1,5,6,7,5,5,5,5,5,6,7,6,6,6,6,6,6,7,7,7,7,7,7,7,7};
 	float array2;
 
 	int row1,col1,row2,col2;
@@ -44,14 +47,27 @@ int main(void){
 			cin>>array2[i];
 		}*/
 
-row1=3;row2=2;col1=3;col2=2;
+row1=7;row2=2;col1=7;col2=2;
 
 
 	Matrix m(&array1[0], row1, col1);
 	//Matrix m2(array2,row2,col2);
 //	Matrix z =m*m2;
 	//z.print_matrix();
+	m.print_matrix();
+	cout<<"\n";
+	auto start = std::chrono::system_clock::now();
 
-	cout<<m.determinant();
+	cout<<m.determinant()<<"\n";
+
+	auto end = std::chrono::system_clock::now();
+
+	std::chrono::duration<double> elapsed_seconds = end-start;
+    std::time_t end_time = std::chrono::system_clock::to_time_t(end);
+
+	std::cout << "finished computation at " << std::ctime(&end_time)
+	              << "elapsed time: " << elapsed_seconds.count() << "s\n";
+
+	m.transpose().print_matrix();
 	return 0;
 }

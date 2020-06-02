@@ -9,7 +9,7 @@
 #define MATRIX_H_
 #include <iostream>
 #include <stddef.h>
-#include <vector>
+
 
 using namespace std;
 
@@ -31,6 +31,9 @@ public:
 	float** make_2d(float* , int ,int);
 
 	int print_matrix();
+
 	float determinant();
+
+	Matrix transpose();
 };
 #endif /* MATRIX_H_ */

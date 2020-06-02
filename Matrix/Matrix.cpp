@@ -115,6 +115,8 @@ int Matrix::print_matrix(){
 			return 0;
 	};
 
+
+
 float Matrix::determinant(){
 	float result=0;
 
@@ -154,6 +156,27 @@ float Matrix::determinant(){
 	}
 	return result;
 
+};
+
+
+Matrix Matrix::transpose(){
+
+float* ary= new float[this->row *this->col];
+
+int ary_index=0;
+for( int i = 0; i<this->col;i++){
+
+
+
+	for(int j=0;j<this->row;j++){
+
+		ary[ary_index] =this->mat[j][i];
+		ary_index++;
+	}
+
+}
+Matrix m(ary,this->row, this->col);
+return m;
 };
 
 
