@@ -187,7 +187,7 @@ float* ary =new float[this->col*this->row];
 int col=this->col;
 int row=this->row;
 int ary_index=0;
-int sign=1;
+
 		for(int i=0; i< col ;i++){
 			for(int h=0 ;h <row ;h++){
 				float* arr = new float[(row-1)*(col-1)];
@@ -203,8 +203,8 @@ int sign=1;
 					}
 				}
 				Matrix m(arr, row-1,col-1);
-				ary[ary_index] =sign*m.determinant();
-				sign=sign*-1;
+				ary[ary_index] =pow(-1.0,(double)(i+h))*m.determinant();
+
 				ary_index++;
 			}
 

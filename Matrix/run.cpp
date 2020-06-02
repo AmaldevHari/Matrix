@@ -13,7 +13,7 @@
 int main(void){
 
 
-	float array1[9]= {1,2,3,3,5,6,7,3,2};
+	float array1[25]= {1,2,3,1,2,3,5,6,1,2,7,3,2,1,2,1,1,1,1,2,2,2,2,2,2};
 	//float array2;
 
 	int row1,col1;//row2,col2;
@@ -45,7 +45,7 @@ int main(void){
 			cin>>array2[i];
 		}*/
 
-row1=3;col1=3;
+row1=5;col1=5;
 
 
 	Matrix m(&array1[0], row1, col1);
