@@ -7,48 +7,114 @@
 
 #include "Matrix.h"
 
-
-int main(void){
-
-
-	int row=3;int col=3;
-	float ary[]={2,2,2,2,2,2,2,2,2,2};
-	float* mat = &ary[0];
-	float ary2[] ={1,1,1,1,1,1,1,1,1};
-	float* mat1 =&ary2[0];
-	Matrix m(mat, row, col);
-	Matrix m2(mat1,3,3);
-	Matrix z =m*m2;
-
-	char e ='\n';
-		char append=' ';
-	for(int i =0; i<9;i++){
+	Matrix::Matrix(float* a, int row,int col){
 
 
-		if((i+1)%3 ==0){
-			append=e;
-		}
-	cout<<*(z.mat+ i)<<append;
-	append=' ';
-	}
-	cout<<"\n";
+		Matrix::row = row;
 
-	float** newmat = z.make_2d();
+		Matrix::col = col;
 
-	for(int i =0; i<3;i++){
-		for( int j=0; j<3 ;j++){
+		Matrix::mat= a;
 
 
-			if(j == 2){
-				append=e;
+	};
+
+
+Matrix	Matrix::multiply(Matrix b){
+
+
+
+
+
+
+		int matrix1_row = this->row;
+
+		int matrix2_col = b.col;
+
+		int matrix1_col =this->col;
+
+		float* mat;
+		mat= (float*)malloc(sizeof(float)* matrix1_row *matrix2_col);
+
+		Matrix result(mat, matrix1_row, matrix2_col);
+
+		int current_result_index=0;
+
+		for(int i=0 ;i<matrix1_row; i++){
+
+			for( int j=0; j<matrix2_col ;j++){
+
+				float entry=0;
+
+				for(int k=0; k< matrix1_col; k++){
+
+					entry+= *(this->mat + matrix1_col*i+ k)* *(b.mat + k* matrix2_col +j);
+
+				}
+
+				mat[current_result_index]= entry;
+
+				current_result_index ++;
 			}
-		cout<< newmat[i][j]<<append;
-		append=' ';
 		}
-	}
 
 
-	return 0;
-}
+		return result;
+
+		};
+	Matrix Matrix::operator*( Matrix& b) {
+
+		return this->multiply(b);
+
+	};
+
+float** Matrix::make_2d(){
+
+
+
+		int rows = this->row;
+
+		int cols = this->col;
+
+		float** temp_mat = new float*[rows];
+
+		int current_index=0;
+
+		for ( int i =0 ;i < rows ; i++ ){
+
+			float* row_elements= new float[cols];
+
+			for( int j =0 ; j< cols ;j++){
+
+				row_elements[j]= this->mat[current_index];
+
+				current_index++;
+			}
+			temp_mat[i]= row_elements;
+		}
+
+		return temp_mat;
+	};
+
+
+int Matrix::print_matrix(){
+		string append = " ";
+		string e ="\n";
+		float** newmat = this->make_2d();
+
+			for(int i =0; i<3;i++){
+				for( int j=0; j<3 ;j++){
+
+
+					if(j == 2){
+						append=e;
+					}
+				cout<< newmat[i][j]<<append;
+				append=' ';
+				}
+			}
+			return 0;
+	};
+
 
 

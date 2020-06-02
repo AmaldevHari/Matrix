@@ -22,93 +22,15 @@ public:
 
 	float* mat;
 
-	Matrix(float* a, int row,int col){
+	Matrix(float* , int ,int );
 
+	Matrix	multiply(Matrix);
 
-		Matrix::row = row;
+	Matrix operator*( Matrix& );
 
-		Matrix::col = col;
+	float** make_2d();
 
-		Matrix::mat= a;
-
-
-	};
-	Matrix	multiply(Matrix b){
-
-
-
-
-
-
-		int matrix1_row = this->row;
-
-		int matrix2_col = b.col;
-
-		int matrix1_col =this->col;
-
-		float* mat;
-		mat= (float*)malloc(sizeof(float)* matrix1_row *matrix2_col);
-
-		Matrix result(mat, matrix1_row, matrix2_col);
-
-		int current_result_index=0;
-
-		for(int i=0 ;i<matrix1_row; i++){
-
-			for( int j=0; j<matrix2_col ;j++){
-
-				float entry=0;
-
-				for(int k=0; k< matrix1_col; k++){
-
-					entry+= *(this->mat + matrix1_col*i+ k)* *(b.mat + k* matrix2_col +j);
-
-				}
-
-				mat[current_result_index]= entry;
-
-				current_result_index ++;
-			}
-		}
-
-
-		return result;
-
-		};
-	Matrix operator*( Matrix& b) {
-
-		return this->multiply(b);
-
-	};
-
-	float** make_2d(){
-
-
-
-		int rows = this->row;
-
-		int cols = this->col;
-
-		float** temp_mat = (float**) malloc(sizeof(float*)*row);
-
-		int current_index=0;
-
-		for ( int i =0 ;i < rows ; i++ ){
-
-			float* row_elements= (float*) malloc(sizeof(float)*cols);
-
-			for( int j =0 ; j< cols ;j++){
-
-				row_elements[j]= this->mat[current_index];
-
-				current_index++;
-			}
-			temp_mat[i]= row_elements;
-		}
-
-		return temp_mat;
-	};
+	int print_matrix();
 
 };
-
 #endif /* MATRIX_H_ */
