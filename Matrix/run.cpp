@@ -43,5 +43,6 @@ int main(void){
 	cout<<"\n";
 	if(m.equal(x)){cout<<"yes";}
 	else{cout<<"no";}
+
 	return 0;
 }

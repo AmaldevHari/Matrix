@@ -18,7 +18,7 @@
  *  [col] number of elements constitute row 2 and so on...
  *
  *  WARNING : Enough memory must be allocated to the 1D array to have row * col number of elements. Failure to do so
- *  will result in buffer overflow and might produce unpredictable results;
+ *  may result in segfault and might produce unpredictable results;
  ***************************************************************************************************************************/
 Matrix::Matrix(float* a, int row,int col){
 
@@ -66,7 +66,7 @@ Matrix	Matrix::multiply(Matrix b){
 				entry+= this->mat[i][k] * b.mat[k][j];
 
 			}
-			if(entry > 1.0e-3){
+			if(entry > 1.0e-3 || entry< -1.0e-3){
 				mat[current_result_index]= entry;
 
 			}else{
