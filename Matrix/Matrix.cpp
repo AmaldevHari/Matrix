@@ -19,15 +19,34 @@ int main(void){
 	Matrix m(mat, row, col);
 	Matrix m2(mat1,3,3);
 	Matrix z =m*m2;
-	for(int i =0; i<9;i++){
-		char e ='\n';
+
+	char e ='\n';
 		char append=' ';
+	for(int i =0; i<9;i++){
+
+
 		if((i+1)%3 ==0){
 			append=e;
 		}
 	cout<<*(z.mat+ i)<<append;
 	append=' ';
 	}
+	cout<<"\n";
+
+	float** newmat = z.make_2d();
+
+	for(int i =0; i<3;i++){
+		for( int j=0; j<3 ;j++){
+
+
+			if(j == 2){
+				append=e;
+			}
+		cout<< newmat[i][j]<<append;
+		append=' ';
+		}
+	}
+
 
 	return 0;
 }
