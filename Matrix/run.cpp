@@ -40,7 +40,6 @@ int main(void){
 	x.print_matrix();
 	cout<<"\n";
 	(m* x).print_matrix();
-
 	cout<<"\n";
 	if(m.equal(x)){cout<<"yes";}
 	else{cout<<"no";}

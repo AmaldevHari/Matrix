@@ -14,6 +14,7 @@
 using namespace std;
 
 class Matrix{
+	float** make_2d(float* , int ,int);
 public:
 
 	int row;
@@ -29,7 +30,7 @@ public:
 
 	Matrix operator*( Matrix );
 
-	float** make_2d(float* , int ,int);
+
 
 	int print_matrix();
 

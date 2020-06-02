@@ -6,20 +6,37 @@
  */
 
 #include "Matrix.h"
+/***************************************************************************************************************************
+ * Matrix constructor that takes the address of the first element of a 1D array. The first input is given is part of
+ *  1D array and the number of rows and columns are specified. The constructor then constructs a 2d matrix based on
+ *  the specified values.
+ *
+ *  The convention of reading this 1D array is row by row, the first [col] number of elements constitute 1st row, the next
+ *  [col] number of elements constitute row 2 and so on...
+ *
+ *  WARNING : Enough memory must be allocated to the 1D array to have row * col number of elements. Failure to do so
+ *  will result in buffer overflow and might produce unpredictable results;
+ ***************************************************************************************************************************/
+Matrix::Matrix(float* a, int row,int col){
 
-	Matrix::Matrix(float* a, int row,int col){
+
+	Matrix::row = row;
+
+	Matrix::col = col;
+
+	Matrix::mat= make_2d(a, row ,col);
 
 
-		Matrix::row = row;
+};
 
-		Matrix::col = col;
-
-		Matrix::mat= make_2d(a, row ,col);
-
-
-	};
-
-
+/***************************************************************************************************************************
+ * multiplication of two matrices. This function returns a void Matrix ( uninitialized) if the dimensions are not compatible
+ *
+ * two matrices can only be multiplied if the columns of left hand side matrix is equal to rows of right hand side matrix.
+ * The resultant matrix will have dimensions of row_1 x col_2, where row_1 is rows of left matrix and col2 is the columns of
+ * right matrix.
+ *
+ ***************************************************************************************************************************/
 Matrix	Matrix::multiply(Matrix b){
 
 	if(b.row != this->col){
@@ -27,103 +44,93 @@ Matrix	Matrix::multiply(Matrix b){
 		return Matrix();
 	}
 
+	int matrix1_row = this->row;
+	int matrix2_col = b.col;
+	int matrix1_col =this->col;
 
+	float* mat;
+	mat= new float[matrix1_row* matrix2_col];
 
+	int current_result_index=0;
 
-		int matrix1_row = this->row;
+	for(int i=0 ;i<matrix1_row; i++){
+		for( int j=0; j<matrix2_col ;j++){
 
-		int matrix2_col = b.col;
+			float entry=0;
 
-		int matrix1_col =this->col;
+			for(int k=0; k< matrix1_col; k++){
 
-		float* mat;
+				entry+= this->mat[i][k] * b.mat[k][j];
 
-		mat= new float[matrix1_row* matrix2_col];
-
-
-
-		int current_result_index=0;
-
-		for(int i=0 ;i<matrix1_row; i++){
-
-			for( int j=0; j<matrix2_col ;j++){
-
-				float entry=0;
-
-				for(int k=0; k< matrix1_col; k++){
-
-					entry+= this->mat[i][k] * b.mat[k][j];
-
-				}
-
-				if(entry > 1.0e-3){
+			}
+			if(entry > 1.0e-3){
 				mat[current_result_index]= entry;
-				}
-				else{
-					mat[current_result_index]= 0;
-				}
-				current_result_index ++;
+
+			}else{
+				mat[current_result_index]= 0;
 			}
+			current_result_index ++;
 		}
+	}
 
-		Matrix result(mat, matrix1_row, matrix2_col);
-
-
-		return result;
-
-		};
-	Matrix Matrix::operator*( Matrix b) {
-
-		return this->multiply(b);
-
-	};
-
- float** Matrix::make_2d(float* mat, int rows, int cols){
+	Matrix result(mat, matrix1_row, matrix2_col);
 
 
+	return result;
 
-		float** temp_mat = new float*[rows];
+};
+Matrix Matrix::operator*( Matrix b) {
 
-		int current_index=0;
+	return this->multiply(b);
 
-		for ( int i =0 ;i < rows ; i++ ){
+};
 
-			float* row_elements= new float[cols];
+float** Matrix::make_2d(float* mat, int rows, int cols){
 
-			for( int j =0 ; j< cols ;j++){
 
-				row_elements[j]= mat[current_index];
 
-				current_index++;
-			}
-			temp_mat[i]= row_elements;
+	float** temp_mat = new float*[rows];
+
+	int current_index=0;
+
+	for ( int i =0 ;i < rows ; i++ ){
+
+		float* row_elements= new float[cols];
+
+		for( int j =0 ; j< cols ;j++){
+
+			row_elements[j]= mat[current_index];
+
+			current_index++;
 		}
+		temp_mat[i]= row_elements;
+	}
 
-		return temp_mat;
-	};
+	return temp_mat;
+};
 
 
 int Matrix::print_matrix(){
 
-		string append = " ";
-		string e ="\n";
+	string append = " ";
+	string e ="\n";
 
-		int col=this->col;
-		int row=this->row;
+	int col=this->col;
+	int row=this->row;
 
-			for(int i =0; i<row;i++){
-				for( int j=0; j<col ;j++){
+	for(int i =0; i<row;i++){
+		for( int j=0; j<col ;j++){
 
 
-					if(j == col-1){
-						append=e;
-					}
-				cout<< this->mat[i][j]<<append;
-				append=' ';
-				}
+			if(j == col-1){
+				append=e;
 			}
-			return 0;
-	};
+			cout<< this->mat[i][j]<<append;
+			append=' ';
+		}
+	}
+	return 0;
+};
 
 
 
@@ -147,29 +154,29 @@ float Matrix::determinant(){
 
 
 
-		for(int i=0; i< col ;i++){
+	for(int i=0; i< col ;i++){
 
-			float* arr = new float[(row-1)*(col-1)];
-			int array_index=0;
+		float* arr = new float[(row-1)*(col-1)];
+		int array_index=0;
 
-			for(int j=0;j< row ;j++){
-				for(int k=0; k<col; k++){
+		for(int j=0;j< row ;j++){
+			for(int k=0; k<col; k++){
 
-					if (!(k==i || j==0)){
-						arr[array_index]= this->mat[j][k];
-						array_index++;
-					}
+				if (!(k==i || j==0)){
+					arr[array_index]= this->mat[j][k];
+					array_index++;
 				}
 			}
-			Matrix m(arr, row-1,col-1);
-			if((i+1)%2 ==0){
-				result+= -1*this->mat[0][i]*m.determinant();
-			}
-			else{
-				result+= this->mat[0][i]*m.determinant();
-			}
-
 		}
+		Matrix m(arr, row-1,col-1);
+		if((i+1)%2 ==0){
+			result+= -1*this->mat[0][i]*m.determinant();
+		}
+		else{
+			result+= this->mat[0][i]*m.determinant();
+		}
+
+	}
 
 
 	return result;
@@ -179,73 +186,73 @@ float Matrix::determinant(){
 
 Matrix Matrix::transpose(){
 
-float* ary= new float[this->row *this->col];
+	float* ary= new float[this->row *this->col];
 
-int ary_index=0;
-for( int i = 0; i<this->col;i++){
+	int ary_index=0;
+	for( int i = 0; i<this->col;i++){
 
 
 
-	for(int j=0;j<this->row;j++){
+		for(int j=0;j<this->row;j++){
 
-		ary[ary_index] =this->mat[j][i];
-		ary_index++;
+			ary[ary_index] =this->mat[j][i];
+			ary_index++;
+		}
+
 	}
-
-}
-Matrix m(ary,this->row, this->col);
-return m;
+	Matrix m(ary,this->row, this->col);
+	return m;
 };
 
 
 Matrix Matrix::adjoint(){
 
-int col=this->col;
-int row=this->row;
+	int col=this->col;
+	int row=this->row;
 
-if(col !=row){
-	cout<<"error: only square matrices can have adjoint"<<"\n";
-	return Matrix();
-}
+	if(col !=row){
+		cout<<"error: only square matrices can have adjoint"<<"\n";
+		return Matrix();
+	}
 
-float* ary =new float[this->col*this->row];
+	float* ary =new float[this->col*this->row];
 
 
-int ary_index=0;
+	int ary_index=0;
 
-if(col ==2 && row ==2){
+	if(col ==2 && row ==2){
 
-	ary[0] =this->mat[1][1];
-	ary[1] = -1*this->mat[0][1] ;
-	ary[2]=  -1*this->mat[1][0];
-	ary[3] =this->mat[0][0];
+		ary[0] =this->mat[1][1];
+		ary[1] = -1*this->mat[0][1] ;
+		ary[2]=  -1*this->mat[1][0];
+		ary[3] =this->mat[0][0];
 
-	 return Matrix(ary,row,col);
-}
+		return Matrix(ary,row,col);
+	}
 
-		for(int i=0; i< col ;i++){
-			for(int h=0 ;h <row ;h++){
-				float* arr = new float[(row-1)*(col-1)];
-				int array_index=0;
+	for(int i=0; i< col ;i++){
+		for(int h=0 ;h <row ;h++){
+			float* arr = new float[(row-1)*(col-1)];
+			int array_index=0;
 
-				for(int j=0;j< row ;j++){
-					for(int k=0; k<col; k++){
+			for(int j=0;j< row ;j++){
+				for(int k=0; k<col; k++){
 
-						if (!(k==i || j==h)){
-							arr[array_index]= this->mat[j][k];
-							array_index++;
-						}
+					if (!(k==i || j==h)){
+						arr[array_index]= this->mat[j][k];
+						array_index++;
 					}
 				}
-				Matrix m(arr, row-1,col-1);
-				ary[ary_index] =pow(-1.0,(double)(i+h))*m.determinant();
-
-				ary_index++;
 			}
+			Matrix m(arr, row-1,col-1);
+			ary[ary_index] =pow(-1.0,(double)(i+h))*m.determinant();
 
-}
-Matrix cofac(ary,row,col);
-return cofac;
+			ary_index++;
+		}
+
+	}
+	Matrix cofac(ary,row,col);
+	return cofac;
 };
 
 
@@ -266,13 +273,13 @@ Matrix::Matrix(){};
 
 Matrix Matrix::inverse(){
 
-		float det = this->determinant();
-		float input =1.0/det;
+	float det = this->determinant();
+	float input =1.0/det;
 
-		Matrix x=this->adjoint();
-		x.scalar_multiply(input);
+	Matrix x=this->adjoint();
+	x.scalar_multiply(input);
 
-		return x;
+	return x;
 };
 
 bool Matrix::equal(Matrix b){
