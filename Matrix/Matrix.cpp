@@ -128,16 +128,24 @@ int Matrix::print_matrix(){
 
 
 float Matrix::determinant(){
+
+	int col=this->col;
+	int row=this->row;
+
+	if(row != col){
+		cout<<"error: only square matrices can have determinants"<<"\n";
+		return NAN;
+	}
+
 	float result=0;
 
-	if( this->row ==2 && this->col ==2){
+	if( row ==2 && col ==2){
 		return this->mat[0][0] *this->mat[1][1] -this->mat[0][1]*this->mat[1][0];
 	}
-	else{
 
 
-		int col=this->col;
-		int row=this->row;
+
+
 
 		for(int i=0; i< col ;i++){
 
@@ -163,7 +171,7 @@ float Matrix::determinant(){
 
 		}
 
-	}
+
 	return result;
 
 };
@@ -192,10 +200,17 @@ return m;
 
 Matrix Matrix::adjoint(){
 
-float* ary =new float[this->col*this->row];
-
 int col=this->col;
 int row=this->row;
+
+if(col !=row){
+	cout<<"error: only square matrices can have adjoint"<<"\n";
+	return Matrix();
+}
+
+float* ary =new float[this->col*this->row];
+
+
 int ary_index=0;
 
 if(col ==2 && row ==2){
@@ -229,8 +244,8 @@ if(col ==2 && row ==2){
 			}
 
 }
-Matrix cofactor(ary,row,col);
-return cofactor;
+Matrix cofac(ary,row,col);
+return cofac;
 };
 
 
@@ -250,9 +265,30 @@ void Matrix::scalar_multiply(float a){
 Matrix::Matrix(){};
 
 Matrix Matrix::inverse(){
+
 		float det = this->determinant();
 		float input =1.0/det;
+
 		Matrix x=this->adjoint();
 		x.scalar_multiply(input);
+
 		return x;
+};
+
+bool Matrix::equal(Matrix b){
+
+	if(this->row != b.row || this->col != b.col){
+		return false;
+	}
+	bool result =true;
+
+	for( int i =0; i< b.row ;i++){
+		for(int j=0; j<b.col ;j++){
+			if(this->mat[i][j] != b.mat[i][j]){
+				return false;
+			}
+		}
+	}
+	return result;
+
 };

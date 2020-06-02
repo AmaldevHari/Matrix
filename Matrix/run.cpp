@@ -13,13 +13,13 @@
 int main(void){
 
 
-	float array1[4]= {1,1,3,1};
+	float array1[9]= {1,1,3,1,1,7,9,4,8};
 
 
 	int row1,col1;
 
 
-	row1=2;col1=2;
+	row1=3;col1=3;
 
 
 	Matrix m(&array1[0], row1, col1);
@@ -35,9 +35,14 @@ int main(void){
 
 
 	cout<<"inverse of this matrix is:"<<"\n";
-
-	m.inverse().print_matrix();
+	Matrix x;
+	x= m.inverse();
+	x.print_matrix();
 	cout<<"\n";
-	(m* m.inverse()).print_matrix();
+	(m* x).print_matrix();
+
+	cout<<"\n";
+	if(m.equal(x)){cout<<"yes";}
+	else{cout<<"no";}
 	return 0;
 }

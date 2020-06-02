@@ -42,5 +42,7 @@ public:
 	void scalar_multiply(float);
 
 	Matrix inverse();
+
+	bool equal(Matrix );
 };
 #endif /* MATRIX_H_ */
