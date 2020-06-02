@@ -65,7 +65,7 @@ Matrix	Matrix::multiply(Matrix b){
 		return result;
 
 		};
-	Matrix Matrix::operator*( Matrix& b) {
+	Matrix Matrix::operator*( Matrix b) {
 
 		return this->multiply(b);
 
@@ -99,13 +99,13 @@ Matrix	Matrix::multiply(Matrix b){
 int Matrix::print_matrix(){
 		string append = " ";
 		string e ="\n";
+		int col=this->col;
+		int row=this->row;
+			for(int i =0; i<row;i++){
+				for( int j=0; j<col ;j++){
 
 
-			for(int i =0; i<3;i++){
-				for( int j=0; j<3 ;j++){
-
-
-					if(j == 2){
+					if(j == col-1){
 						append=e;
 					}
 				cout<< this->mat[i][j]<<append;

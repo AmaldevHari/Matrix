@@ -26,7 +26,7 @@ public:
 
 	Matrix	multiply(Matrix);
 
-	Matrix operator*( Matrix& );
+	Matrix operator*( Matrix );
 
 	float** make_2d(float* , int ,int);
 
