@@ -37,5 +37,7 @@ public:
 	float determinant();
 
 	Matrix transpose();
+
+	Matrix cofactor();
 };
 #endif /* MATRIX_H_ */

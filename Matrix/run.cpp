@@ -13,10 +13,10 @@
 int main(void){
 
 
-	float array1[49]= {1,2,3,3,5,6,7,3,2,1,3,5,6,7,6,7,3,3,5,6,7,1,1,1,1,5,6,7,5,5,5,5,5,6,7,6,6,6,6,6,6,7,7,7,7,7,7,7,7};
-	float array2;
+	float array1[9]= {1,2,3,3,5,6,7,3,2};
+	//float array2;
 
-	int row1,col1,row2,col2;
+	int row1,col1;//row2,col2;
 /*
 	cout<<"Enter number of rows for left hand matrix:";
 	cin>>row1;
@@ -45,7 +45,7 @@ int main(void){
 			cin>>array2[i];
 		}*/
 
-row1=7;row2=2;col1=7;col2=2;
+row1=3;col1=3;
 
 
 	Matrix m(&array1[0], row1, col1);
@@ -67,5 +67,7 @@ row1=7;row2=2;col1=7;col2=2;
 	              << "elapsed time: " << elapsed_seconds.count() << "s\n";
 
 	m.transpose().print_matrix();
+	cout<<"\n";
+	m.cofactor().print_matrix();
 	return 0;
 }
