@@ -14,7 +14,7 @@
 
 		Matrix::col = col;
 
-		Matrix::mat= a;
+		Matrix::mat= make_2d(a, row ,col);
 
 
 	};
@@ -34,9 +34,10 @@ Matrix	Matrix::multiply(Matrix b){
 		int matrix1_col =this->col;
 
 		float* mat;
-		mat= (float*)malloc(sizeof(float)* matrix1_row *matrix2_col);
 
-		Matrix result(mat, matrix1_row, matrix2_col);
+		mat= new float[matrix1_row* matrix2_col];
+
+
 
 		int current_result_index=0;
 
@@ -48,7 +49,7 @@ Matrix	Matrix::multiply(Matrix b){
 
 				for(int k=0; k< matrix1_col; k++){
 
-					entry+= *(this->mat + matrix1_col*i+ k)* *(b.mat + k* matrix2_col +j);
+					entry+= this->mat[i][k] * b.mat[k][j];
 
 				}
 
@@ -57,6 +58,8 @@ Matrix	Matrix::multiply(Matrix b){
 				current_result_index ++;
 			}
 		}
+
+		Matrix result(mat, matrix1_row, matrix2_col);
 
 
 		return result;
@@ -68,13 +71,9 @@ Matrix	Matrix::multiply(Matrix b){
 
 	};
 
-float** Matrix::make_2d(){
+ float** Matrix::make_2d(float* mat, int rows, int cols){
 
 
-
-		int rows = this->row;
-
-		int cols = this->col;
 
 		float** temp_mat = new float*[rows];
 
@@ -86,7 +85,7 @@ float** Matrix::make_2d(){
 
 			for( int j =0 ; j< cols ;j++){
 
-				row_elements[j]= this->mat[current_index];
+				row_elements[j]= mat[current_index];
 
 				current_index++;
 			}
@@ -100,7 +99,7 @@ float** Matrix::make_2d(){
 int Matrix::print_matrix(){
 		string append = " ";
 		string e ="\n";
-		float** newmat = this->make_2d();
+
 
 			for(int i =0; i<3;i++){
 				for( int j=0; j<3 ;j++){
@@ -109,7 +108,7 @@ int Matrix::print_matrix(){
 					if(j == 2){
 						append=e;
 					}
-				cout<< newmat[i][j]<<append;
+				cout<< this->mat[i][j]<<append;
 				append=' ';
 				}
 			}

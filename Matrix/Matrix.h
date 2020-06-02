@@ -20,7 +20,7 @@ public:
 
 	int col;
 
-	float* mat;
+	float** mat;
 
 	Matrix(float* , int ,int );
 
@@ -28,7 +28,7 @@ public:
 
 	Matrix operator*( Matrix& );
 
-	float** make_2d();
+	float** make_2d(float* , int ,int);
 
 	int print_matrix();
 
