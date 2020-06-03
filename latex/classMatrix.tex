@@ -1,0 +1,150 @@
+\hypertarget{classMatrix}{}\doxysection{Matrix Class Reference}
+\label{classMatrix}\index{Matrix@{Matrix}}
+
+
+{\ttfamily \#include $<$Matrix.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMatrix_a41bc4e9ae41cf3aa11d306cef297e02b}{Matrix}} (float $\ast$, int, int)
+\item 
+\mbox{\hyperlink{classMatrix}{Matrix}} \mbox{\hyperlink{classMatrix_a0c222e971f8e4496dafdac589d5c48d7}{multiply}} (\mbox{\hyperlink{classMatrix}{Matrix}})
+\item 
+\mbox{\hyperlink{classMatrix}{Matrix}} \mbox{\hyperlink{classMatrix_a4b076e4a84ec59cf274d21b1d9192c45}{operator$\ast$}} (\mbox{\hyperlink{classMatrix}{Matrix}})
+\item 
+int \mbox{\hyperlink{classMatrix_a8b8acb9a315a7681b87236299a4e9d3f}{print\+\_\+matrix}} ()
+\item 
+float \mbox{\hyperlink{classMatrix_ab853044b1d89a9fcd62d122228a9f10c}{determinant}} ()
+\item 
+\mbox{\hyperlink{classMatrix}{Matrix}} \mbox{\hyperlink{classMatrix_ae23f817021383e3c8636a714dcba1d21}{transpose}} ()
+\item 
+\mbox{\hyperlink{classMatrix}{Matrix}} \mbox{\hyperlink{classMatrix_a7e68abdeef8096ccd77199e22aa928e8}{adjoint}} ()
+\item 
+void \mbox{\hyperlink{classMatrix_a7b5e07164a556d9ab80807dfddb96151}{scalar\+\_\+multiply}} (float)
+\item 
+\mbox{\hyperlink{classMatrix}{Matrix}} \mbox{\hyperlink{classMatrix_ac4f5e7d4bb1bfd6586bd3384bd2a02b0}{inverse}} ()
+\item 
+\mbox{\hyperlink{classMatrix}{Matrix}} \mbox{\hyperlink{classMatrix_a4b3ffd5933702e9d014afb70e6d70e69}{cofactor}} ()
+\item 
+bool \mbox{\hyperlink{classMatrix_a4e3c6426d50d7d444cc15db72385c96d}{equal}} (\mbox{\hyperlink{classMatrix}{Matrix}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classMatrix_a685f8e8daacc010c468d69d24d65f365}{row}}
+\item 
+int \mbox{\hyperlink{classMatrix_a5e60ddb033e335e643b128d96f8d35ec}{col}}
+\item 
+float $\ast$$\ast$ \mbox{\hyperlink{classMatrix_a2cad056a522382434989e18c137f4c93}{mat}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+float $\ast$$\ast$ \mbox{\hyperlink{classMatrix_ac46ca1bd5248bc4b8617ef45588209e4}{make\+\_\+2d}} (float $\ast$, int, int)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classMatrix_a41bc4e9ae41cf3aa11d306cef297e02b}\label{classMatrix_a41bc4e9ae41cf3aa11d306cef297e02b}} 
+\index{Matrix@{Matrix}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{Matrix()}{Matrix()}}
+{\footnotesize\ttfamily Matrix\+::\+Matrix (\begin{DoxyParamCaption}\item[{float $\ast$}]{a,  }\item[{int}]{row,  }\item[{int}]{col }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classMatrix_a7e68abdeef8096ccd77199e22aa928e8}\label{classMatrix_a7e68abdeef8096ccd77199e22aa928e8}} 
+\index{Matrix@{Matrix}!adjoint@{adjoint}}
+\index{adjoint@{adjoint}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{adjoint()}{adjoint()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMatrix}{Matrix}} Matrix\+::adjoint (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classMatrix_a4b3ffd5933702e9d014afb70e6d70e69}\label{classMatrix_a4b3ffd5933702e9d014afb70e6d70e69}} 
+\index{Matrix@{Matrix}!cofactor@{cofactor}}
+\index{cofactor@{cofactor}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{cofactor()}{cofactor()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMatrix}{Matrix}} Matrix\+::cofactor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classMatrix_ab853044b1d89a9fcd62d122228a9f10c}\label{classMatrix_ab853044b1d89a9fcd62d122228a9f10c}} 
+\index{Matrix@{Matrix}!determinant@{determinant}}
+\index{determinant@{determinant}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{determinant()}{determinant()}}
+{\footnotesize\ttfamily float Matrix\+::determinant (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classMatrix_a4e3c6426d50d7d444cc15db72385c96d}\label{classMatrix_a4e3c6426d50d7d444cc15db72385c96d}} 
+\index{Matrix@{Matrix}!equal@{equal}}
+\index{equal@{equal}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{equal()}{equal()}}
+{\footnotesize\ttfamily bool Matrix\+::equal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classMatrix}{Matrix}}}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classMatrix_ac4f5e7d4bb1bfd6586bd3384bd2a02b0}\label{classMatrix_ac4f5e7d4bb1bfd6586bd3384bd2a02b0}} 
+\index{Matrix@{Matrix}!inverse@{inverse}}
+\index{inverse@{inverse}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{inverse()}{inverse()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMatrix}{Matrix}} Matrix\+::inverse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classMatrix_ac46ca1bd5248bc4b8617ef45588209e4}\label{classMatrix_ac46ca1bd5248bc4b8617ef45588209e4}} 
+\index{Matrix@{Matrix}!make\_2d@{make\_2d}}
+\index{make\_2d@{make\_2d}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{make\_2d()}{make\_2d()}}
+{\footnotesize\ttfamily float $\ast$$\ast$ Matrix\+::make\+\_\+2d (\begin{DoxyParamCaption}\item[{float $\ast$}]{mat,  }\item[{int}]{rows,  }\item[{int}]{cols }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMatrix_a0c222e971f8e4496dafdac589d5c48d7}\label{classMatrix_a0c222e971f8e4496dafdac589d5c48d7}} 
+\index{Matrix@{Matrix}!multiply@{multiply}}
+\index{multiply@{multiply}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{multiply()}{multiply()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMatrix}{Matrix}} Matrix\+::multiply (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classMatrix}{Matrix}}}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classMatrix_a4b076e4a84ec59cf274d21b1d9192c45}\label{classMatrix_a4b076e4a84ec59cf274d21b1d9192c45}} 
+\index{Matrix@{Matrix}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMatrix}{Matrix}} Matrix\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classMatrix}{Matrix}}}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classMatrix_a8b8acb9a315a7681b87236299a4e9d3f}\label{classMatrix_a8b8acb9a315a7681b87236299a4e9d3f}} 
+\index{Matrix@{Matrix}!print\_matrix@{print\_matrix}}
+\index{print\_matrix@{print\_matrix}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{print\_matrix()}{print\_matrix()}}
+{\footnotesize\ttfamily int Matrix\+::print\+\_\+matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classMatrix_a7b5e07164a556d9ab80807dfddb96151}\label{classMatrix_a7b5e07164a556d9ab80807dfddb96151}} 
+\index{Matrix@{Matrix}!scalar\_multiply@{scalar\_multiply}}
+\index{scalar\_multiply@{scalar\_multiply}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{scalar\_multiply()}{scalar\_multiply()}}
+{\footnotesize\ttfamily void Matrix\+::scalar\+\_\+multiply (\begin{DoxyParamCaption}\item[{float}]{a }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classMatrix_ae23f817021383e3c8636a714dcba1d21}\label{classMatrix_ae23f817021383e3c8636a714dcba1d21}} 
+\index{Matrix@{Matrix}!transpose@{transpose}}
+\index{transpose@{transpose}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{transpose()}{transpose()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMatrix}{Matrix}} Matrix\+::transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Field Documentation}
+\mbox{\Hypertarget{classMatrix_a5e60ddb033e335e643b128d96f8d35ec}\label{classMatrix_a5e60ddb033e335e643b128d96f8d35ec}} 
+\index{Matrix@{Matrix}!col@{col}}
+\index{col@{col}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{col}{col}}
+{\footnotesize\ttfamily int Matrix\+::col}
+
+\mbox{\Hypertarget{classMatrix_a2cad056a522382434989e18c137f4c93}\label{classMatrix_a2cad056a522382434989e18c137f4c93}} 
+\index{Matrix@{Matrix}!mat@{mat}}
+\index{mat@{mat}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{mat}{mat}}
+{\footnotesize\ttfamily float$\ast$$\ast$ Matrix\+::mat}
+
+\mbox{\Hypertarget{classMatrix_a685f8e8daacc010c468d69d24d65f365}\label{classMatrix_a685f8e8daacc010c468d69d24d65f365}} 
+\index{Matrix@{Matrix}!row@{row}}
+\index{row@{row}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{row}{row}}
+{\footnotesize\ttfamily int Matrix\+::row}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{Matrix_8h}{Matrix.\+h}}\item 
+\mbox{\hyperlink{Matrix_8cpp}{Matrix.\+cpp}}\end{DoxyCompactItemize}
