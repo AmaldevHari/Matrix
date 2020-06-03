@@ -10,7 +10,7 @@
 #include "Matrix.h"
 
 
-int main(void){
+int main(int argc, char* argv[]){
 
 
 	float array1[12]= {1,1,3,1,1,7,1,5,6,3,2,8};
@@ -35,8 +35,7 @@ int main(void){
 
 
 	cout<<"inverse of this matrix is:"<<"\n";
-	Matrix x;
-	x= m.inverse();
+	Matrix x= m.inverse();
 	x.print_matrix();
 	cout<<"\n";
 	(m* x).print_matrix();

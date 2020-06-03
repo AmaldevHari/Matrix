@@ -24,7 +24,7 @@ public:
 	float** mat;
 
 	Matrix(float* , int ,int );
-	Matrix();
+
 
 	Matrix	multiply(Matrix);
 

@@ -44,7 +44,10 @@ Matrix	Matrix::multiply(Matrix b){
 
 	if(b.row != this->col){
 		cout<<"error: matrix dimensions are not compatible for multiplication"<<"\n";
-		return Matrix();
+				float* phony;
+				float p=0;
+				phony=&p;
+				return Matrix(phony,0,0);
 	}
 
 	int matrix1_row = this->row;
@@ -232,7 +235,10 @@ Matrix Matrix::adjoint(){
 
 	if(col !=row){
 		cout<<"error: only square matrices can have adjoint"<<"\n";
-		return Matrix();
+				float* phony;
+				float p=0;
+				phony=&p;
+				return Matrix(phony,0,0);
 	}
 
 	float* ary =new float[this->col*this->row];
@@ -285,15 +291,12 @@ void Matrix::scalar_multiply(float a){
 
 	for( int i=0 ;i< row ;i++){
 		for(int j=0; j<col ;j++){
+
 			this->mat[i][j]= a* this->mat[i][j];
 		}
 
 	}
 };
-/***************************************************************************************************************************
- * non initiliazing constructor for returning void matrices on error.
- ***************************************************************************************************************************/
-Matrix::Matrix(){};
 
 /***************************************************************************************************************************
  * returns an inverse matrix. This algorithm uses the adjoint() function followed by determinant(). The inverse of a matrix A
@@ -302,9 +305,15 @@ Matrix::Matrix(){};
 Matrix Matrix::inverse(){
 
 	if(this->col != this->row){
+
 		cout<<"error: only square matrices can have inverse"<<"\n";
-		return Matrix();
+		float* phony;
+		float p=0;
+		phony=&p;
+
+		return Matrix(phony,0,0);
 	}
+
 	float det = this->determinant();
 	float input =1.0/det;
 
@@ -322,13 +331,16 @@ Matrix Matrix::inverse(){
 bool Matrix::equal(Matrix b){
 
 	if(this->row != b.row || this->col != b.col){
+
 		return false;
 	}
 	bool result =true;
 
 	for( int i =0; i< b.row ;i++){
 		for(int j=0; j<b.col ;j++){
+
 			if(this->mat[i][j] != b.mat[i][j]){
+
 				return false;
 			}
 		}
@@ -340,6 +352,7 @@ bool Matrix::equal(Matrix b){
  * cofactor function that transposes the adjoint of a matrix.
  ***************************************************************************************************************************/
 Matrix Matrix::cofactor(){
+
 	return this->adjoint().transpose();
 
 };
