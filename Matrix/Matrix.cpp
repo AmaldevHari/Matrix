@@ -44,10 +44,10 @@ Matrix	Matrix::multiply(Matrix b){
 
 	if(b.row != this->col){
 		cout<<"error: matrix dimensions are not compatible for multiplication"<<"\n";
-				float* phony;
-				float p=0;
-				phony=&p;
-				return Matrix(phony,0,0);
+		float* phony;
+		float p=0;
+		phony=&p;
+		return Matrix(phony,0,0);
 	}
 
 	int matrix1_row = this->row;
@@ -235,10 +235,10 @@ Matrix Matrix::adjoint(){
 
 	if(col !=row){
 		cout<<"error: only square matrices can have adjoint"<<"\n";
-				float* phony;
-				float p=0;
-				phony=&p;
-				return Matrix(phony,0,0);
+		float* phony;
+		float p=0;
+		phony=&p;
+		return Matrix(phony,0,0);
 	}
 
 	float* ary =new float[this->col*this->row];
@@ -357,7 +357,7 @@ Matrix Matrix::cofactor(){
 
 };
 
-Matrix Matrix::generate_random_matrix(int row, int col, float max , bool negative){
+Matrix Matrix::generate_random_matrix(int row, int col, float max , bool negative, bool decimal){
 
 	srand(time(NULL));
 	int it = row*col;
@@ -369,9 +369,14 @@ Matrix Matrix::generate_random_matrix(int row, int col, float max , bool negativ
 		bias-= max -1;
 		max = max*2;
 	}
-
-	for( int i =0; i<it ;i++){
-		mat[i] = rand() % ((int)max) + bias + (rand()%100 )/100.0 ;
+	if(decimal){
+		for( int i =0; i<it ;i++){
+			mat[i] = rand() % ((int)max) + bias + (rand()%100 )/100.0 ;
+		}
+	}else{
+		for( int i =0; i<it ;i++){
+					mat[i] = rand() % ((int)max) + bias ;
+	}
 	}
 	Matrix result(mat,row, col);
 	return result;

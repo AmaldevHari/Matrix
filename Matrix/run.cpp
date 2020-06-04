@@ -15,7 +15,7 @@ int main(int argc, char* argv[]){
 
 
 	Matrix x ;
-	x=x.generate_random_matrix(4,4,51.0,true);
+	x=x.generate_random_matrix(4,4,51.0,true, false);
 	x.print_matrix();
 	Matrix m= x.inverse();
 

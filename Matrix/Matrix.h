@@ -50,6 +50,6 @@ public:
 
 	bool equal(Matrix );
 
-	Matrix generate_random_matrix(int , int, float, bool);
+	Matrix generate_random_matrix(int , int, float, bool, bool);
 };
 #endif /* MATRIX_H_ */
