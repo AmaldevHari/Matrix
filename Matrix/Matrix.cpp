@@ -356,3 +356,32 @@ Matrix Matrix::cofactor(){
 	return this->adjoint().transpose();
 
 };
+
+Matrix Matrix::generate_random_matrix(int row, int col, float max , bool negative){
+
+	srand(time(NULL));
+	int it = row*col;
+
+	float* mat= new float[it];
+	float bias =0;
+
+	if(negative){
+		bias-= max -1;
+		max = max*2;
+	}
+
+	for( int i =0; i<it ;i++){
+		mat[i] = rand() % ((int)max) + bias + (rand()%100 )/100.0 ;
+	}
+	Matrix result(mat,row, col);
+	return result;
+};
+
+Matrix::Matrix(){
+
+	this->col =0;
+	this->row =0;
+	this->mat = nullptr;
+};
+
+

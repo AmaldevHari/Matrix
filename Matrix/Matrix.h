@@ -10,6 +10,8 @@
 #include <iostream>
 #include <stddef.h>
 #include <cmath>
+#include <stdlib.h>
+#include <time.h>
 
 using namespace std;
 
@@ -24,7 +26,7 @@ public:
 	float** mat;
 
 	Matrix(float* , int ,int );
-
+	Matrix();
 
 	Matrix	multiply(Matrix);
 
@@ -47,5 +49,7 @@ public:
 	Matrix cofactor();
 
 	bool equal(Matrix );
+
+	Matrix generate_random_matrix(int , int, float, bool);
 };
 #endif /* MATRIX_H_ */
