@@ -22,13 +22,19 @@
  ***************************************************************************************************************************/
 Matrix::Matrix(float* a, int row,int col){
 
+	if(row<=0 || col <=0){
 
-	Matrix::row = row;
+		Matrix::mat = new float*[1];
+		Matrix::row = 0;
+		Matrix::col = 0;
 
-	Matrix::col = col;
+	}else{
+		Matrix::row = row;
 
-	Matrix::mat= make_2d(a, row ,col);
+		Matrix::col = col;
 
+		Matrix::mat= make_2d(a, row ,col);
+	}
 
 };
 
@@ -42,20 +48,23 @@ Matrix::Matrix(float* a, int row,int col){
  ***************************************************************************************************************************/
 Matrix	Matrix::multiply(Matrix b){
 
-	if(b.row != this->col){
-		cout<<"error: matrix dimensions are not compatible for multiplication"<<"\n";
-		float* phony;
+
+
+	if(b.row != this->col ){
+		cout<<BOLDRED<<"error: matrix dimensions are not compatible for multiplication"<<RESET<<"\n";
+		float* phony= new float;
 		float p=0;
 		phony=&p;
 		return Matrix(phony,0,0);
 	}
 
+
 	int matrix1_row = this->row;
 	int matrix2_col = b.col;
 	int matrix1_col =this->col;
 
-	float* mat;
-	mat= new float[matrix1_row* matrix2_col];
+	float* mat= new float[matrix1_row* matrix2_col];
+
 
 	int current_result_index=0;
 
@@ -104,6 +113,17 @@ float** Matrix::make_2d(float* mat, int rows, int cols){
 
 
 	float** temp_mat = new float*[rows];
+
+	if(rows ==1 && cols==1){
+
+		float* row_element= new float[cols];
+		row_element[0] = mat[0];
+
+		temp_mat[0] =row_element;
+		return temp_mat;
+	}
+
+
 	int current_index=0;
 
 	for ( int i =0 ;i < rows ; i++ ){
@@ -126,9 +146,13 @@ float** Matrix::make_2d(float* mat, int rows, int cols){
  ***************************************************************************************************************************/
 int Matrix::print_matrix(){
 
+	cout<<"\n";
 	string append = " ";
 	string e ="\n";
-
+	if(this->row==0 || this->col==0){
+		cout<<BOLDRED<<"error: invalid dimenstions for matrix"<<RESET<<"\n";
+		return 0;
+	}
 	int col=this->col;
 	int row=this->row;
 
@@ -139,16 +163,17 @@ int Matrix::print_matrix(){
 			if(j == col-1){
 				append=e;
 			}
-			cout<< this->mat[i][j]<<append;
+			cout<<BOLDBLUE<<this->mat[i][j]<<append;
 			append=' ';
 		}
 	}
+	cout<<RESET<<"\n";
 	return 0;
 };
 
 
 /***************************************************************************************************************************
- *finds the determinant of the matrix this function is called with. First s=checks if the matrix is square or not.
+ *finds the determinant of the matrix this function is called with. First checks if the matrix is square or not.
  *In the former case this function is recursively called with a base case for 2 x 2 matrix. The method used is
  *is cofactor expansion along the first row.
  ***************************************************************************************************************************/
@@ -157,15 +182,17 @@ float Matrix::determinant(){
 	int col=this->col;
 	int row=this->row;
 
-
+	if(row ==0 || col==0 ){
+		return NAN;
+	}
 	if(row != col){
-		cout<<"error: only square matrices can have determinants"<<"\n";
+		cout<<BOLDRED<<"error: only square matrices can have determinants"<<RESET<<"\n";
 		return NAN;
 	}
 
 	if(row==1){
-		cout<<"error: invalid dimenstions for determinant"<<"\n";
-				return this->mat[0][0];
+		cout<<BOLDRED<<"error: invalid dimenstions for determinant"<<RESET<<"\n";
+		return this->mat[0][0];
 	}
 
 	float result=0;
@@ -212,6 +239,13 @@ float Matrix::determinant(){
  ***************************************************************************************************************************/
 Matrix Matrix::transpose(){
 
+	if(this->row ==0 || this->col ==0 ){
+		cout<<BOLDRED<<"error: invalid dimensions"<<RESET<<"\n";
+				float* phony= new float;;
+				float p=0;
+				phony=&p;
+				return Matrix(phony,0,0);
+		}
 	float* ary= new float[this->row *this->col];
 
 	int ary_index=0;
@@ -240,8 +274,14 @@ Matrix Matrix::adjoint(){
 	int row=this->row;
 
 	if(col !=row){
-		cout<<"error: only square matrices can have adjoint"<<"\n";
-		float* phony;
+		cout<<BOLDRED<<"error: only square matrices can have adjoint"<<RESET<<"\n";
+		float* phony= new float;;
+		float p=0;
+		phony=&p;
+		return Matrix(phony,0,0);
+	}if(row==0){
+		cout<<BOLDRED<<"error: invalid dimenstions for adjoint"<<RESET<<"\n";
+		float* phony= new float;;
 		float p=0;
 		phony=&p;
 		return Matrix(phony,0,0);
@@ -312,13 +352,23 @@ Matrix Matrix::inverse(){
 
 	if(this->col != this->row){
 
-		cout<<"error: only square matrices can have inverse"<<"\n";
-		float* phony;
+		cout<<BOLDRED<<"error: only square matrices can have inverse"<<RESET<<"\n";
+		float* phony= new float;;
 		float p=0;
 		phony=&p;
 
 		return Matrix(phony,0,0);
 	}
+	if(this->col <=1){
+
+		cout<<BOLDRED<<"error: singular value"<<RESET<<"\n";
+		float* phony= new float;;
+		float p=0;
+		phony=&p;
+
+		return Matrix(phony,0,0);
+	}
+
 
 	float det = this->determinant();
 	float input =1.0/det;
@@ -340,6 +390,7 @@ bool Matrix::equal(Matrix b){
 
 		return false;
 	}
+
 	bool result =true;
 
 	for( int i =0; i< b.row ;i++){
@@ -381,8 +432,8 @@ Matrix Matrix::generate_random_matrix(int row, int col, float max , bool negativ
 		}
 	}else{
 		for( int i =0; i<it ;i++){
-					mat[i] = rand() % ((int)max) + bias ;
-	}
+			mat[i] = rand() % ((int)max) + bias ;
+		}
 	}
 	Matrix result(mat,row, col);
 	return result;

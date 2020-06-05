@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/home/amaldev/Matrix/Matrix/Matrix.cpp
+Matrix.h
+/home/amaldev/Matrix/Matrix/Matrix.h
+
 /home/amaldev/Matrix/Matrix/Matrix.h
 iostream
 -
@@ -21,4 +25,6 @@ time.h
 /home/amaldev/Matrix/Matrix/run.cpp
 Matrix.h
 /home/amaldev/Matrix/Matrix/Matrix.h
+limits
+-
 
