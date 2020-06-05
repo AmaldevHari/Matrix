@@ -15,6 +15,29 @@
 #include <windows.h>
 
 
+static HANDLE h_console = GetStdHandle(STD_OUTPUT_HANDLE);
+
+static void set_output_green(){
+	 SetConsoleTextAttribute(h_console, 2);
+
+}
+static void set_output_blue(){
+	 SetConsoleTextAttribute(h_console, 1);
+
+}
+static void set_output_red(){
+	 SetConsoleTextAttribute(h_console, 4);
+
+}
+static void set_output_magenta(){
+	 SetConsoleTextAttribute(h_console, 5);
+
+}
+static void set_output_default(){
+	 SetConsoleTextAttribute(h_console, 7);
+
+}
+/* 1 for blue, 4 for red, 2 for green , 5 for magenta , 7 for white(default)*/
 using namespace std;
 
 
