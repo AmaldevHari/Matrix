@@ -1,6 +1,6 @@
 cd Matrix-win
 
-rm Matrix.exe
+del Matrix.exe
 
 cd ..
 
