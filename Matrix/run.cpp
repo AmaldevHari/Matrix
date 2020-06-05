@@ -8,46 +8,47 @@
 
 
 #include "Matrix.h"
+#include <limits>
 
 Matrix main_loop_matrix_init(){
 
 
 
-		row_col_init:	int row; int col;
+	row_col_init:	int row; int col;
 
-			cout<<"Enter number of rows and coloumns in order: "<<"\n";
+	cout<<"Enter number of rows and coloumns in order: "<<"\n";
 
-			
+
 	while(!(cin >> row)){
-    cout << "error: invalid input!";
-    cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-}		
-		while(!(cin >> col)){
-    cout << "error: invalid input!";
-    cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-}	
+		cout << "error: invalid input!";
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	}
+	while(!(cin >> col)){
+		cout << "error: invalid input!";
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	}
 
-			array_inputs:
-			float* mat;int it= row*col;
-			mat = new float[it];
+	array_inputs:
+	float* mat;int it= row*col;
+	mat = new float[it];
 
-			cout<<"Enter elements of matrix in order: "<<"\n";
+	cout<<"Enter elements of matrix in order: "<<"\n";
 
 
-			for( int i=0;i <it; i++){
-					while(!(cin >> mat[i])){
-    cout << "error: invalid input!";
-    cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-}	
+	for( int i=0;i <it; i++){
+		while(!(cin >> mat[i])){
+			cout << "error: invalid input!";
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
 
-					
-			}
 
-			Matrix m(mat, row, col);
-			return m;
+	}
+
+	Matrix m(mat, row, col);
+	return m;
 }
 
 
@@ -65,14 +66,14 @@ int ask(){
 	cout<<"reply with a number representing the operation"<<"\n";
 
 	int result;
-		while(!(cin >> result)){
-    cout << "error: invalid input!";
-    cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-}	
+	while(!(cin >> result)){
+		cout << "error: invalid input!";
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	}
 
-		
-	
+
+
 	return result;
 }
 
@@ -114,11 +115,11 @@ int main(int argc, char* argv[]){
 		case 6: {
 			get_num:float num;
 			cout<<"enter a number to multiply:"<<"\n";
-				while(!(cin >> num)){
-    cout << "error: invalid input!";
-    cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-}	
+			while(!(cin >> num)){
+				cout << "error: invalid input!";
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			}
 
 			one.scalar_multiply(num);
 			one.print_matrix();
