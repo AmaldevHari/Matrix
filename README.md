@@ -32,7 +32,10 @@ Requirements CMake, g++/gcc
 (1) execute the file linux-install-matrix
 
 (2) run linux-run-matrix
- 
+
+to uninstall:
+
+execute linux-unintsall-matrix
 
 Gor Windows users:
 
@@ -40,3 +43,7 @@ Requirements g++/gcc
 (1)  simply type "win-install-matrix"
 
 (2) type "win-run-matrix"
+
+to uninstall:
+
+type "win-uninstall-matrix"
