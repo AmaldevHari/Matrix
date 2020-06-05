@@ -14,7 +14,7 @@ Matrix main_loop_matrix_init(){
 
 
 
-	row_col_init:	int row; int col;
+	int row; int col;
 
 	cout<<"Enter number of rows and coloumns in order: "<<"\n\n";
 
@@ -30,7 +30,7 @@ Matrix main_loop_matrix_init(){
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	}
 
-	array_inputs:
+	
 	float* mat;int it= row*col;
 	mat = new float[it];
 
@@ -54,7 +54,7 @@ Matrix main_loop_matrix_init(){
 
 int ask(){
 
-	ask_:cout<<" What would you like to do:"<<"\n\n";
+	cout<<" What would you like to do:"<<"\n\n";
 	cout<<" The following operations are available:"<<"\n\n";
 	cout<<"1.multiply"<<"\n";
 	cout<<"2.adjoint"<<"\n";
@@ -63,6 +63,7 @@ int ask(){
 	cout<<"5.print matrix"<<"\n";
 	cout<<"6.scalar multiply"<<"\n";
 	cout<<"7.inverse"<<"\n\n";
+	cout<<"8.reset matrix and other data related to it and start over"<<"\n";
 	cout<<"reply with a number representing the operation"<<"\n\n";
 
 	int result;
@@ -86,34 +87,97 @@ int main(int argc, char* argv[]){
 
 	while( true){
 
-		cout<<"Create main Matrix: "<<"\n\n";
+		start:cout<<"Create main Matrix: "<<"\n\n";
 		Matrix one=main_loop_matrix_init();
 		char decision;
 		cout<<"do you want to create a second matrix to perform operations with it? Enter y or n"<<"\n \n";
 
 		Matrix two;
 		cin>>decision;
-		if(decision == 'y'){
+		if(decision == 'y' || decision == 'Y' ){
 
 			two = main_loop_matrix_init();
 		}
 
+
 		ask_:int operation=ask();
 
-		if(operation<1 || operation >7){
+		if(operation<1 || operation >8){
 
 			delete(&operation);
 			goto ask_;
 		}
 		switch(operation){
-
+		int dec=0;
 		case 1: one.multiply(two).print_matrix(); cout<<"\n\n";break;
-		case 2: one.adjoint().print_matrix(); cout<<"\n\n";break;
-		case 3: one.cofactor().print_matrix(); break;
-		case 4: cout<<one.determinant()<<"\n\n"; break;
-		case 5: one.print_matrix();  cout<<"\n\n";break;
-		case 6: {
-			get_num:float num;
+		case 2: cout<<"Which matrix 1 or 2?: \n";
+			
+			while(!(cin >> dec)){
+				cout << "error: invalid input!";
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			}
+			if(dec ==1){
+			one.adjoint().print_matrix(); 
+			cout<<"\n\n";break;
+			}else if( dec ==2){
+			two.adjoint().print_matrix(); 
+			cout<<"\n\n";break;
+			}else{
+			cout<<"error: unrepresented matrix number\n\n";break;}
+
+		case 3: cout<<"Which matrix 1 or 2?: \n";
+			
+			while(!(cin >> dec)){
+				cout << "error: invalid input!";
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			}
+			if(dec ==1){
+			one.cofactor().print_matrix(); 
+			cout<<"\n\n";break;
+			}else if( dec ==2){
+			two.cofactor().print_matrix(); 
+			cout<<"\n\n";break;
+			}else{
+			cout<<"error: unrepresented matrix number\n\n";break;}
+
+		case 4: while(!(cin >> dec)){
+				cout << "error: invalid input!";
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			}
+			if(dec ==1){
+			cout<<one.determinant(); 
+			cout<<"\n\n";break;
+			}else if( dec ==2){
+			two.determinant(); 
+			cout<<"\n\n";break;
+			}else{
+			cout<<"error: unrepresented matrix number\n\n";break;}
+
+		case 5: while(!(cin >> dec)){
+				cout << "error: invalid input!";
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			}
+			if(dec ==1){
+			one.print_matrix(); 
+			cout<<"\n\n";break;
+			}else if( dec ==2){
+			two.print_matrix(); 
+			cout<<"\n\n";break;
+			}else{
+			cout<<"error: unrepresented matrix number\n\n";break;}
+
+		case 6:while(!(cin >> dec)){
+				cout << "error: invalid input!";
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			}
+			float num;
+			if(dec ==1){
+			
 			cout<<"enter a number to multiply:"<<"\n\n";
 			while(!(cin >> num)){
 				cout << "error: invalid input!";
@@ -124,21 +188,41 @@ int main(int argc, char* argv[]){
 			one.scalar_multiply(num);
 			one.print_matrix(); cout<<"\n\n";
 			break;}
-		case 7: one.inverse().print_matrix(); cout<<"\n\n";break;
+			}else if( dec ==2){
+			cout<<"enter a number to multiply:"<<"\n\n";
+			while(!(cin >> num)){
+				cout << "error: invalid input!";
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			}
 
+			two.scalar_multiply(num);
+			two.print_matrix(); cout<<"\n\n";
+			break;}
+			}else{
+			cout<<"error: unrepresented matrix number\n\n";break;} {
+			
+		case 7: while(!(cin >> dec)){
+				cout << "error: invalid input!";
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			}
+			if(dec ==1){
+			one.inverse().print_matrix(); 
+			cout<<"\n\n";break;
+			}else if( dec ==2){
+			two.inverse().print_matrix(); 
+			cout<<"\n\n";break;
+			}else{
+			cout<<"error: unrepresented matrix number\n\n";break;}
+		case 8: delete(one); delete(two); goto start;
 
 		}
-		cout<<"would you like to continue doing operations on same matrix? Enter y or n \n\n";
-		cin>>decision;
-		if(decision == 'y' ||decision == 'Y'){
-			goto ask_;
-		}
-		cout<<"would you like to exit? Enter y or n"<<"\n\n";
+		cout<<"to exit this app press Ctrl + X "<<"\n\n";
+		goto ask_;
+		
 
-		cin>>decision;
-		if(decision == 'y'||decision == 'Y'){
-			return 0;
-		}
+		
 
 	}
 	return 0;
