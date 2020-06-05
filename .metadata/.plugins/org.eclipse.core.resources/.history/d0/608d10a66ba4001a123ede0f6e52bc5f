@@ -1,0 +1,54 @@
+/*
+ * Matrix.h
+ *
+ *  Created on: May 30, 2020
+ *      Author: amaldev
+ */
+
+#ifndef MATRIX_H_
+#define MATRIX_H_
+#include <iostream>
+#include <stddef.h>
+#include <vector>
+
+using namespace std;
+
+class Matrix{
+public:
+
+	int row;
+
+	int col;
+
+	float* mat;
+
+	Matrix(float* a, int row,int col);
+
+	Matrix	multiply(Matrix b);
+
+	Matrix operator*( Matrix& b);
+
+	float** make_2d();
+
+	int print_matrix(){
+		string append = " ";
+		string e ="\n";
+		float** newmat = this->make_2d();
+
+			for(int i =0; i<3;i++){
+				for( int j=0; j<3 ;j++){
+
+
+					if(j == 2){
+						append=e;
+					}
+				cout<< newmat[i][j]<<append;
+				append=' ';
+				}
+			}
+			return 0;
+	};
+
+};
+
+#endif /* MATRIX_H_ */

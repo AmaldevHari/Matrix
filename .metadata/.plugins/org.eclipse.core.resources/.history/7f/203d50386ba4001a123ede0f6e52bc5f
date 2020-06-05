@@ -1,0 +1,74 @@
+/*
+ * Matrix.cpp
+ *
+ *  Created on: May 30, 2020
+ *      Author: amaldev
+ */
+
+#include "Matrix.h"
+
+float** Matrix::make_2d(){
+
+
+
+		int rows = this->row;
+
+		int cols = this->col;
+
+		float** temp_mat = new float*[rows];
+
+		int current_index=0;
+
+		for ( int i =0 ;i < rows ; i++ ){
+
+			float* row_elements= new float[cols];
+
+			for( int j =0 ; j< cols ;j++){
+
+				row_elements[j]= this->mat[current_index];
+
+				current_index++;
+			}
+			temp_mat[i]= row_elements;
+		}
+
+		return temp_mat;
+	};
+
+int Matrix::print_matrix(){
+		string append = " ";
+		string e ="\n";
+		float** newmat = this->make_2d();
+
+			for(int i =0; i<3;i++){
+				for( int j=0; j<3 ;j++){
+
+
+					if(j == 2){
+						append=e;
+					}
+				cout<< newmat[i][j]<<append;
+				append=' ';
+				}
+			}
+			return 0;
+	};
+
+int main(void){
+
+
+	int row=3;int col=3;
+	float ary[]={2,2,3,2,2,2,2,2,2,2};
+	float* mat = &ary[0];
+	float ary2[] ={1,1,1,1,1,1,1,1,1};
+	float* mat1 =&ary2[0];
+	Matrix m(mat, row, col);
+	Matrix m2(mat1,3,3);
+	Matrix z =m*m2;
+	z.print_matrix();
+
+
+	return 0;
+}
+
+

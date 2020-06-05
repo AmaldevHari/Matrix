@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;Matrix/runtime_checker.cpp&apos;" deleteContents="false" description="Delete resource &apos;Matrix/runtime_checker.cpp&apos;" element1="/Matrix/runtime_checker.cpp" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1591130862939"/>
+</session>

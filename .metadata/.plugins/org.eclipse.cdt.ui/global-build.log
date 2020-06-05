@@ -1,0 +1,20 @@
+15:22:27 **** Build of configuration Debug for project Matrix ****
+make all 
+Building file: ../Matrix.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Matrix.d" -MT"Matrix.o" -o "Matrix.o" "../Matrix.cpp"
+Finished building: ../Matrix.cpp
+ 
+Building file: ../run-linux.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"run-linux.d" -MT"run-linux.o" -o "run-linux.o" "../run-linux.cpp"
+Finished building: ../run-linux.cpp
+ 
+Building target: Matrix
+Invoking: GCC C++ Linker
+g++  -o "Matrix"  ./Matrix.o ./run-linux.o   
+Finished building target: Matrix
+ 
+15:22:38 **** Incremental Build of configuration Debug for project Matrix ****
+make all 
+make: Nothing to be done for 'all'.

@@ -1,0 +1,27 @@
+/*
+ * runtime_checker.cpp
+ *
+ *  Created on: Jun. 2, 2020
+ *      Author: amaldev
+ */
+
+#include <chrono>
+#include <ctime>
+
+
+
+
+void check_runtime(&function){
+
+	auto start = std::chrono::system_clock::now();
+
+	auto end = std::chrono::system_clock::now();
+
+	std::chrono::duration<double> elapsed_seconds = end-start;
+    std::time_t end_time = std::chrono::system_clock::to_time_t(end);
+
+	std::cout << "finished computation at " << std::ctime(&end_time)
+	              << "elapsed time: " << elapsed_seconds.count() << "\n";
+}
+
+
