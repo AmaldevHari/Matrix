@@ -16,7 +16,7 @@ Matrix main_loop_matrix_init(){
 
 	row_col_init:	int row; int col;
 
-	cout<<"Enter number of rows and coloumns in order: "<<"\n";
+	cout<<"Enter number of rows and coloumns in order: "<<"\n\n";
 
 
 	while(!(cin >> row)){
@@ -34,7 +34,7 @@ Matrix main_loop_matrix_init(){
 	float* mat;int it= row*col;
 	mat = new float[it];
 
-	cout<<"Enter elements of matrix in order: "<<"\n";
+	cout<<"Enter elements of matrix row by row: "<<"\n\n";
 
 
 	for( int i=0;i <it; i++){
@@ -54,16 +54,16 @@ Matrix main_loop_matrix_init(){
 
 int ask(){
 
-	ask_:cout<<" What would you like to do:"<<"\n";
-	cout<<" The following operations are available:"<<"\n";
+	ask_:cout<<" What would you like to do:"<<"\n\n";
+	cout<<" The following operations are available:"<<"\n\n";
 	cout<<"1.multiply"<<"\n";
 	cout<<"2.adjoint"<<"\n";
 	cout<<"3.cofactor"<<"\n";
 	cout<<"4.determinant"<<"\n";
 	cout<<"5.print matrix"<<"\n";
 	cout<<"6.scalar multiply"<<"\n";
-	cout<<"7.inverse"<<"\n";
-	cout<<"reply with a number representing the operation"<<"\n";
+	cout<<"7.inverse"<<"\n\n";
+	cout<<"reply with a number representing the operation"<<"\n\n";
 
 	int result;
 	while(!(cin >> result)){
@@ -73,7 +73,7 @@ int ask(){
 	}
 
 
-
+	cout<<"\n";
 	return result;
 }
 
@@ -86,10 +86,10 @@ int main(int argc, char* argv[]){
 
 	while( true){
 
-		cout<<"Create main Matrix: "<<"\n";
+		cout<<"Create main Matrix: "<<"\n\n";
 		Matrix one=main_loop_matrix_init();
 		char decision;
-		cout<<"do you want to create a second matrix to perform operations with it? Enter y or n"<<"\n";
+		cout<<"do you want to create a second matrix to perform operations with it? Enter y or n"<<"\n \n";
 
 		Matrix two;
 		cin>>decision;
@@ -107,14 +107,14 @@ int main(int argc, char* argv[]){
 		}
 		switch(operation){
 
-		case 1: one.multiply(two).print_matrix();break;
-		case 2: one.adjoint().print_matrix();break;
+		case 1: one.multiply(two).print_matrix(); cout<<"\n\n";break;
+		case 2: one.adjoint().print_matrix(); cout<<"\n\n";break;
 		case 3: one.cofactor().print_matrix(); break;
-		case 4: cout<<one.determinant()<<"\n"; break;
-		case 5: one.print_matrix(); break;
+		case 4: cout<<one.determinant()<<"\n\n"; break;
+		case 5: one.print_matrix();  cout<<"\n\n";break;
 		case 6: {
 			get_num:float num;
-			cout<<"enter a number to multiply:"<<"\n";
+			cout<<"enter a number to multiply:"<<"\n\n";
 			while(!(cin >> num)){
 				cout << "error: invalid input!";
 				cin.clear();
@@ -122,18 +122,18 @@ int main(int argc, char* argv[]){
 			}
 
 			one.scalar_multiply(num);
-			one.print_matrix();
+			one.print_matrix(); cout<<"\n\n";
 			break;}
-		case 7: one.inverse().print_matrix();break;
+		case 7: one.inverse().print_matrix(); cout<<"\n\n";break;
 
 
 		}
-		cout<<"would you like to continue doing operations on same matrix? Enter y or n \n";
+		cout<<"would you like to continue doing operations on same matrix? Enter y or n \n\n";
 		cin>>decision;
 		if(decision == 'y' ||decision == 'Y'){
 			goto ask_;
 		}
-		cout<<"would you like to exit? Enter y or n"<<"\n";
+		cout<<"would you like to exit? Enter y or n"<<"\n\n";
 
 		cin>>decision;
 		if(decision == 'y'||decision == 'Y'){
