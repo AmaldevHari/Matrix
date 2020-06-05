@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/amaldev/Matrix/Matrix-linux/Matrix.cpp
+Matrix.h
+/home/amaldev/Matrix/Matrix-linux/Matrix.h
+
+/home/amaldev/Matrix/Matrix-linux/Matrix.h
+iostream
+-
+stddef.h
+-
+cmath
+-
+stdlib.h
+-
+time.h
+-
+
+/home/amaldev/Matrix/Matrix-linux/run-linux.cpp
+Matrix.h
+/home/amaldev/Matrix/Matrix-linux/Matrix.h
+limits
+-
+
