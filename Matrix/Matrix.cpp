@@ -157,9 +157,15 @@ float Matrix::determinant(){
 	int col=this->col;
 	int row=this->row;
 
+
 	if(row != col){
 		cout<<"error: only square matrices can have determinants"<<"\n";
 		return NAN;
+	}
+
+	if(row==1){
+		cout<<"error: invalid dimenstions for determinant"<<"\n";
+				return this->mat[0][0];
 	}
 
 	float result=0;

@@ -30,7 +30,7 @@ public:
 
 	Matrix	multiply(Matrix);
 
-	Matrix operator*( Matrix );
+	Matrix operator*( Matrix);
 
 
 
