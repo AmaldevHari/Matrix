@@ -52,9 +52,7 @@ Matrix	Matrix::multiply(Matrix b){
 
 	if(b.row != this->col ){
 		cout<<BOLDRED<<"error: matrix dimensions are not compatible for multiplication"<<RESET<<"\n";
-		float* phony= new float;
-		float p=0;
-		phony=&p;
+		float* phony= nullptr;
 		return Matrix(phony,0,0);
 	}
 
@@ -144,7 +142,7 @@ float** Matrix::make_2d(float* mat, int rows, int cols){
 /***************************************************************************************************************************
  * Prints out the matrix in standard matrix form into stdout. The columns and rows are interpreted from the object members.
  ***************************************************************************************************************************/
-int Matrix::print_matrix(){
+int Matrix::print_matrix() const{
 
 	cout<<"\n";
 	string append = " ";
@@ -241,9 +239,7 @@ Matrix Matrix::transpose(){
 
 	if(this->row ==0 || this->col ==0 ){
 		cout<<BOLDRED<<"error: invalid dimensions"<<RESET<<"\n";
-				float* phony= new float;;
-				float p=0;
-				phony=&p;
+				float* phony= nullptr;
 				return Matrix(phony,0,0);
 		}
 	float* ary= new float[this->row *this->col];
@@ -275,15 +271,11 @@ Matrix Matrix::adjoint(){
 
 	if(col !=row){
 		cout<<BOLDRED<<"error: only square matrices can have adjoint"<<RESET<<"\n";
-		float* phony= new float;;
-		float p=0;
-		phony=&p;
+		float* phony= nullptr;
 		return Matrix(phony,0,0);
 	}if(row==0){
 		cout<<BOLDRED<<"error: invalid dimenstions for adjoint"<<RESET<<"\n";
-		float* phony= new float;;
-		float p=0;
-		phony=&p;
+		float* phony= nullptr;
 		return Matrix(phony,0,0);
 	}
 
@@ -353,18 +345,14 @@ Matrix Matrix::inverse(){
 	if(this->col != this->row){
 
 		cout<<BOLDRED<<"error: only square matrices can have inverse"<<RESET<<"\n";
-		float* phony= new float;;
-		float p=0;
-		phony=&p;
+		float* phony= nullptr;
 
 		return Matrix(phony,0,0);
 	}
 	if(this->col <=1){
 
 		cout<<BOLDRED<<"error: singular value"<<RESET<<"\n";
-		float* phony= new float;;
-		float p=0;
-		phony=&p;
+		float* phony= nullptr;
 
 		return Matrix(phony,0,0);
 	}
@@ -384,7 +372,7 @@ Matrix Matrix::inverse(){
  * in a linear manner until one of them is not equal or the checking completes. In the case of completion true vale is
  * returned by default
  ***************************************************************************************************************************/
-bool Matrix::equal(Matrix b){
+bool Matrix::equal(Matrix b) const{
 
 	if(this->row != b.row || this->col != b.col){
 

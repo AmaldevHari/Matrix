@@ -53,7 +53,7 @@ public:
 
 
 
-	int print_matrix();
+	int print_matrix() const;
 
 	float determinant();
 
@@ -67,7 +67,7 @@ public:
 
 	Matrix cofactor();
 
-	bool equal(Matrix );
+	bool equal(Matrix ) const;
 
 	Matrix generate_random_matrix(int , int, float, bool, bool);
 };
