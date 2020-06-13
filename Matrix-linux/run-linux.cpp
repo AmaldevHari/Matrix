@@ -10,6 +10,8 @@
 #include "Matrix.h"
 #include <limits>
 
+
+
 Matrix main_loop_matrix_init(){
 
 
@@ -299,10 +301,10 @@ int main(int argc, char* argv[]){
 
 	while( true){
 
-		float* phony =new float;
+
 		Matrix one;
-		Matrix two(phony, 0, 0);
-		Matrix three(phony, 0, 0);
+		Matrix two;
+		Matrix three;
 
 		start:cout<<BOLDGREEN<<"Create main Matrix: "<<RESET<<"\n\n";
 		one=main_loop_matrix_init();

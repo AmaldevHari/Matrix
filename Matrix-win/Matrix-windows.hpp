@@ -49,14 +49,16 @@ public:
 
 	int col;
 
+	bool is_valid;
+
 	float** mat;
 
 	Matrix(float* , int ,int );
 	Matrix();
 
-	Matrix	multiply(Matrix);
+	Matrix	multiply(Matrix&);
 
-	Matrix operator*( Matrix);
+	Matrix operator*( Matrix&);
 
 
 
@@ -74,7 +76,7 @@ public:
 
 	Matrix cofactor();
 
-	bool equal(Matrix );
+	bool equal(Matrix& );
 
 	Matrix generate_random_matrix(int , int, float, bool, bool);
 	

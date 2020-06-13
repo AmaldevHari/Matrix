@@ -28,12 +28,15 @@ Matrix::Matrix(float* a, int row,int col){
 
 		Matrix::mat = new float*[1];
 		Matrix::row = 0;
+		Matrix::is_valid =false;
 		Matrix::col = 0;
 
 	}else{
 		Matrix::row = row;
 
 		Matrix::col = col;
+
+		Matrix::is_valid =true;
 
 		Matrix::mat= make_2d(a, row ,col);
 	}
@@ -48,24 +51,21 @@ Matrix::Matrix(float* a, int row,int col){
  * right matrix.
  *
  ***************************************************************************************************************************/
-Matrix	Matrix::multiply(Matrix b){
+Matrix	Matrix::multiply(Matrix& b){
 
 
 
-	if(b.row != this->col ){
+	if(( !b.is_valid || b.row != this->col )||(!this->is_valid)){
 		set_output_red();
 		cout<<" "<<"error: matrix dimensions are not compatible for multiplication"<<" "<<"\n";
 		set_output_default();
-		float* phony= new float;
-		float p=0;
-		phony=&p;
-		return Matrix(phony,0,0);
+		return Matrix();
 	}
 
 
-	int matrix1_row = this->row;
-	int matrix2_col = b.col;
-	int matrix1_col =this->col;
+	const int matrix1_row = this->row;
+	const int matrix2_col = b.col;
+	const int matrix1_col =this->col;
 
 	float* mat= new float[matrix1_row* matrix2_col];
 
@@ -150,17 +150,18 @@ float** Matrix::make_2d(float* mat, int rows, int cols){
  ***************************************************************************************************************************/
 int Matrix::print_matrix(){
 
+
 	cout<<"\n";
 	string append = " ";
-	string e ="\n";
-	if(this->row==0 || this->col==0){
+	const string e ="\n";
+	if(!this->is_valid){
 		set_output_red();
-		cout<<" "<<"error: invalid dimenstions for matrix"<<" "<<"\n";
+		cout<<" "<<"error: invalid dimensions for matrix"<<" "<<"\n";
 		set_output_default();
 		return 0;
 	}
-	int col=this->col;
-	int row=this->row;
+	const int col=this->col;
+	const int row=this->row;
 
 	set_output_blue();
 	for(int i =0; i<row;i++){
@@ -187,12 +188,14 @@ int Matrix::print_matrix(){
  ***************************************************************************************************************************/
 float Matrix::determinant(){
 
-	int col=this->col;
-	int row=this->row;
 
-	if(row ==0 || col==0 ){
+	if(!this->is_valid){
 		return NAN;
 	}
+
+	const int col=this->col;
+	const int row=this->row;
+
 	if(row != col){
 		set_output_red();
 		cout<<" "<<"error: only square matrices can have determinants"<<" "<<"\n";
@@ -251,14 +254,12 @@ float Matrix::determinant(){
  ***************************************************************************************************************************/
 Matrix Matrix::transpose(){
 
-	if(this->row ==0 || this->col ==0 ){
+	if(!is_valid ){
 		set_output_red();
 		cout<<" "<<"error: invalid dimensions"<<" "<<"\n";
 		set_output_default();
-				float* phony= new float;;
-				float p=0;
-				phony=&p;
-				return Matrix(phony,0,0);
+
+				return Matrix();
 		}
 	float* ary= new float[this->row *this->col];
 
@@ -287,22 +288,19 @@ Matrix Matrix::adjoint(){
 	int col=this->col;
 	int row=this->row;
 
-	if(col !=row){
+	if(!is_valid){
+
+			set_output_red();
+			cout<<" "<<"error: invalid dimenstions for adjoint"<<" "<<"\n";
+			set_output_default();
+			return Matrix();
+
+		}if(col !=row){
+
 		set_output_red();
 		cout<<" "<<"error: only square matrices can have adjoint"<<" "<<"\n";
 		set_output_default();
-		float* phony= new float;;
-		float p=0;
-		phony=&p;
-		return Matrix(phony,0,0);
-	}if(row==0){
-		set_output_red();
-		cout<<" "<<"error: invalid dimenstions for adjoint"<<" "<<"\n";
-		set_output_default();
-		float* phony= new float;;
-		float p=0;
-		phony=&p;
-		return Matrix(phony,0,0);
+		return Matrix();
 	}
 
 	float* ary =new float[this->col*this->row];
@@ -350,6 +348,10 @@ Matrix Matrix::adjoint(){
 
 void Matrix::scalar_multiply(float a){
 
+	if(!this->is_valid){
+		return;
+	}
+
 	int row=this->row;
 	int col=this->col;
 
@@ -368,28 +370,24 @@ void Matrix::scalar_multiply(float a){
  ***************************************************************************************************************************/
 Matrix Matrix::inverse(){
 
+	if(!this->is_valid){
+
+
+			set_output_red();
+			cout<<" "<<"error: singular value"<<" "<<"\n";
+			set_output_default();
+
+			return Matrix();
+		}
 	if(this->col != this->row){
 
 		set_output_red();
 		cout<<" "<<"error: only square matrices can have inverse"<<" "<<"\n";
 		set_output_default();
-		float* phony= new float;;
-		float p=0;
-		phony=&p;
 
-		return Matrix(phony,0,0);
+		return Matrix();
 	}
-	if(this->col <=1){
-		
-		set_output_red();
-		cout<<" "<<"error: singular value"<<" "<<"\n";
-		set_output_default();
-		float* phony= new float;;
-		float p=0;
-		phony=&p;
 
-		return Matrix(phony,0,0);
-	}
 
 
 	float det = this->determinant();
@@ -406,7 +404,11 @@ Matrix Matrix::inverse(){
  * in a linear manner until one of them is not equal or the checking completes. In the case of completion true vale is
  * returned by default
  ***************************************************************************************************************************/
-bool Matrix::equal(Matrix b){
+bool Matrix::equal(Matrix& b){
+
+	if(!is_valid){
+		return false;
+	}
 
 	if(this->row != b.row || this->col != b.col){
 
@@ -465,6 +467,7 @@ Matrix::Matrix(){
 
 	this->col =0;
 	this->row =0;
+	this->is_valid =false;
 	this->mat = nullptr;
 };
 

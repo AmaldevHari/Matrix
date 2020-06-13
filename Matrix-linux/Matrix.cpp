@@ -24,14 +24,18 @@ Matrix::Matrix(float* a, int row,int col){
 
 	if(row<=0 || col <=0){
 
-		Matrix::mat = new float*[1];
+		Matrix::mat = nullptr;
 		Matrix::row = 0;
 		Matrix::col = 0;
+		Matrix::is_valid=false;
+
+		cout<<BOLDYELLOW<<"Warning!: Invalid initialization! Matrix object may not correspond to the inputs"<<RESET<<"\n\n";
 
 	}else{
-		Matrix::row = row;
 
+		Matrix::row = row;
 		Matrix::col = col;
+		Matrix::is_valid= true;
 
 		Matrix::mat= make_2d(a, row ,col);
 	}
@@ -46,30 +50,34 @@ Matrix::Matrix(float* a, int row,int col){
  * right matrix.
  *
  ***************************************************************************************************************************/
-Matrix	Matrix::multiply(Matrix b){
+Matrix	Matrix::multiply(Matrix& b){
 
+	/********************************************************************************************************
+	 * check if there was an invalid initialization for one of the matrices, minimum number of rows is 1
+	 * and cols is 1 for valid init. The bool variable is_valid will only be true if the rows and colmuns are
+	 *  greater than 0;
+	 **********************************************************************************************************/
 
+	if(( !b.is_valid || b.row != this->col )||(!this->is_valid)){
 
-	if(b.row != this->col ){
-		cout<<BOLDRED<<"error: matrix dimensions are not compatible for multiplication"<<RESET<<"\n";
-		float* phony= nullptr;
-		return Matrix(phony,0,0);
+		cout<<BOLDRED<<"error: matrix dimensions are not compatible for multiplication or invalid matrix"<<RESET<<"\n";
+		return Matrix();
 	}
 
 
-	int matrix1_row = this->row;
-	int matrix2_col = b.col;
-	int matrix1_col =this->col;
+	const int matrix1_row = this->row;
+	const int matrix2_col = b.col;
+	const int matrix1_col =this->col;
 
 	float* mat= new float[matrix1_row* matrix2_col];
-
+	float entry;
 
 	int current_result_index=0;
 
 	for(int i=0 ;i<matrix1_row; i++){
 		for( int j=0; j<matrix2_col ;j++){
 
-			float entry=0;
+			entry=0;
 
 			for(int k=0; k< matrix1_col; k++){
 
@@ -96,7 +104,7 @@ Matrix	Matrix::multiply(Matrix b){
 /***************************************************************************************************************************
  * Overloaded * operator for multiplication of two matrices
  ***************************************************************************************************************************/
-Matrix Matrix::operator*( Matrix b) {
+Matrix Matrix::operator*( Matrix& b) {
 
 	return this->multiply(b);
 
@@ -108,13 +116,14 @@ Matrix Matrix::operator*( Matrix b) {
  ***************************************************************************************************************************/
 float** Matrix::make_2d(float* mat, int rows, int cols){
 
-
+	/* no error checking required since this is a private function and can only be called inside a constructor
+	 * after successful initialization of valid rows and cols*/
 
 	float** temp_mat = new float*[rows];
 
 	if(rows ==1 && cols==1){
 
-		float* row_element= new float[cols];
+		float* row_element= new float[1];
 		row_element[0] = mat[0];
 
 		temp_mat[0] =row_element;
@@ -146,13 +155,14 @@ int Matrix::print_matrix() const{
 
 	cout<<"\n";
 	string append = " ";
-	string e ="\n";
-	if(this->row==0 || this->col==0){
-		cout<<BOLDRED<<"error: invalid dimenstions for matrix"<<RESET<<"\n";
+	const string e ="\n";
+
+	if(!this->is_valid){
+		cout<<BOLDRED<<"error: invalid dimensions for matrix"<<RESET<<"\n";
 		return 0;
 	}
-	int col=this->col;
-	int row=this->row;
+	const int col=this->col;
+	const int row=this->row;
 
 	for(int i =0; i<row;i++){
 		for( int j=0; j<col ;j++){
@@ -177,30 +187,33 @@ int Matrix::print_matrix() const{
  ***************************************************************************************************************************/
 float Matrix::determinant(){
 
-	int col=this->col;
-	int row=this->row;
-
-	if(row ==0 || col==0 ){
+	if(!this->is_valid){
+		cout<<BOLDRED<<"error: invalid initialization error, re-initialize matrix"<<RESET<<"\n";
 		return NAN;
 	}
+
+	const int col=this->col;
+	const int row=this->row;
+
+
 	if(row != col){
 		cout<<BOLDRED<<"error: only square matrices can have determinants"<<RESET<<"\n";
 		return NAN;
 	}
 
 	if(row==1){
-		cout<<BOLDRED<<"error: invalid dimenstions for determinant"<<RESET<<"\n";
+		cout<<BOLDRED<<"error: invalid dimensions for determinant"<<RESET<<"\n";
 		return this->mat[0][0];
 	}
 
-	float result=0;
+
 
 	if( row ==2){
 		return this->mat[0][0] *this->mat[1][1] -this->mat[0][1]*this->mat[1][0];
 	}
 
 
-
+	float result=0;
 
 
 	for(int i=0; i< col ;i++){
@@ -237,18 +250,16 @@ float Matrix::determinant(){
  ***************************************************************************************************************************/
 Matrix Matrix::transpose(){
 
-	if(this->row ==0 || this->col ==0 ){
+	if(!this->is_valid ){
+
 		cout<<BOLDRED<<"error: invalid dimensions"<<RESET<<"\n";
-				float* phony= nullptr;
-				return Matrix(phony,0,0);
-		}
+		return Matrix();
+	}
 	float* ary= new float[this->row *this->col];
 
 	int ary_index=0;
+
 	for( int i = 0; i<this->col;i++){
-
-
-
 		for(int j=0;j<this->row;j++){
 
 			ary[ary_index] =this->mat[j][i];
@@ -266,17 +277,18 @@ Matrix Matrix::transpose(){
  ***************************************************************************************************************************/
 Matrix Matrix::adjoint(){
 
-	int col=this->col;
-	int row=this->row;
+	if(!this->is_valid){
+		cout<<BOLDRED<<"error: invalid dimensions for adjoint"<<RESET<<"\n";
+
+		return Matrix();
+	}
+	const int col=this->col;
+	const int row=this->row;
+
 
 	if(col !=row){
 		cout<<BOLDRED<<"error: only square matrices can have adjoint"<<RESET<<"\n";
-		float* phony= nullptr;
-		return Matrix(phony,0,0);
-	}if(row==0){
-		cout<<BOLDRED<<"error: invalid dimenstions for adjoint"<<RESET<<"\n";
-		float* phony= nullptr;
-		return Matrix(phony,0,0);
+		return Matrix();
 	}
 
 	float* ary =new float[this->col*this->row];
@@ -324,8 +336,12 @@ Matrix Matrix::adjoint(){
 
 void Matrix::scalar_multiply(float a){
 
-	int row=this->row;
-	int col=this->col;
+	if(!is_valid){
+
+		return;
+	}
+	const int row=this->row;
+	const int col=this->col;
 
 	for( int i=0 ;i< row ;i++){
 		for(int j=0; j<col ;j++){
@@ -347,14 +363,12 @@ Matrix Matrix::inverse(){
 		cout<<BOLDRED<<"error: only square matrices can have inverse"<<RESET<<"\n";
 		float* phony= nullptr;
 
-		return Matrix(phony,0,0);
+		return Matrix();
 	}
-	if(this->col <=1){
+	if(!this->is_valid){
 
 		cout<<BOLDRED<<"error: singular value"<<RESET<<"\n";
-		float* phony= nullptr;
-
-		return Matrix(phony,0,0);
+		return Matrix();
 	}
 
 
@@ -372,7 +386,11 @@ Matrix Matrix::inverse(){
  * in a linear manner until one of them is not equal or the checking completes. In the case of completion true vale is
  * returned by default
  ***************************************************************************************************************************/
-bool Matrix::equal(Matrix b) const{
+bool Matrix::equal(Matrix& b) const{
+
+	if(!b.is_valid || !this->is_valid){
+		return false;
+	}
 
 	if(this->row != b.row || this->col != b.col){
 
@@ -431,6 +449,7 @@ Matrix::Matrix(){
 
 	this->col =0;
 	this->row =0;
+	this->is_valid =false;
 	this->mat = nullptr;
 };
 

@@ -32,6 +32,7 @@
 #define BOLDCYAN    "\033[1m\033[36m"      /* Bold Cyan */
 #define BOLDWHITE   "\033[1m\033[37m"      /* Bold White */
 
+
 using namespace std;
 
 class Matrix{
@@ -44,12 +45,14 @@ public:
 
 	float** mat;
 
+	bool is_valid;
+
 	Matrix(float* , int ,int );
 	Matrix();
 
-	Matrix	multiply(Matrix);
+	Matrix	multiply(Matrix&);
 
-	Matrix operator*( Matrix);
+	Matrix operator*( Matrix&);
 
 
 
@@ -67,7 +70,7 @@ public:
 
 	Matrix cofactor();
 
-	bool equal(Matrix ) const;
+	bool equal(Matrix& ) const;
 
 	Matrix generate_random_matrix(int , int, float, bool, bool);
 };
