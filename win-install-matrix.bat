@@ -1,5 +1,11 @@
+@echo off
 cd Matrix-win
 
-g++ Matrix-windows.cpp run-windows.cpp -o Matrix.exe
+g++ -v Matrix-windows.cpp run-windows.cpp -o Matrix.exe
+
 
 cd ..
+
+echo success!
+@echo on
+
