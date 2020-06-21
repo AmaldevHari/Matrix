@@ -6,4 +6,6 @@ cmake ../
 
 make 
 
+cd ..
+
 echo success!
