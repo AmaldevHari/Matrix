@@ -8,7 +8,7 @@
  *
  */
 
-#include "Matrix.h"
+#include "Matrix.hpp"
 /***************************************************************************************************************************
  * Matrix constructor that takes the address of the first element of a 1D array. The first input is given is part of
  *  1D array and the number of rows and columns are specified. The constructor then constructs a 2d matrix based on
